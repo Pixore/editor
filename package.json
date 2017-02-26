@@ -95,6 +95,7 @@
     "lodash.defaults": "^4.2.0",
     "lodash.omit": "^4.5.0",
     "lodash.pick": "^4.4.0",
+    "morgan": "^1.8.1",
     "normalize.css": "^5.0.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",

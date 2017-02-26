@@ -4,6 +4,8 @@ const { isDev, PORT, PUBLIC_PATH } = require('./config/environment')
 
 const app = express()
 
+require('./config/express')(app)
+
 if (isDev) {
   const webpack = require('webpack')
   const webpackMiddleware = require('webpack-dev-middleware')
