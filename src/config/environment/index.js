@@ -5,7 +5,7 @@ const path = require('path')
 
 const config = {}
 
-config.PORT = Number(process.env.PORT) || 8001
+config.PORT = Number(process.env.PORT) || 80
 config.isDev = process.env.NODE_ENV === 'development'
 config.isTest = process.env.NODE_ENV === 'test'
 config.isProd = process.env.NODE_ENV === 'production'
