@@ -93,7 +93,7 @@ export const onMouseDown = function (evt) {
       this.props.layer,
       this.props.sprite.artboard,
       {
-        main: this.refs.active.context,
+        main: this.state.main.context,
         preview: this.state.preview.context,
         background: this.state.background.context,
         mask: this.state.mask.context

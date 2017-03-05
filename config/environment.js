@@ -6,7 +6,7 @@ const config = {}
 
 config.MONGODB_URI = process.env.MONGODB_URI
 config.PORT = Number(process.env.PORT) || 80
-config.PIXORE_PATH = process.env.PIXORE_PATH
+config.PIXORE_PATH = process.env.PIXORE_PATH || ''
 config.isDev = process.env.NODE_ENV === 'development'
 config.isTest = process.env.NODE_ENV === 'test'
 config.isProd = process.env.NODE_ENV === 'production'

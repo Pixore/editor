@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+// import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { register } from 'react-dynamic-layout'
 
@@ -65,9 +65,9 @@ obj.onSubmitName = function (name) {
 
 obj.render = function () {
   return <Panel name='Menus' style={this.state.style} dragBar={false}>
-    <Link to='/'>
+    <a href='/'>
       <image className='logo' />
-    </Link>
+    </a>
     <Menu active inline>
       <Menu child>
         Project

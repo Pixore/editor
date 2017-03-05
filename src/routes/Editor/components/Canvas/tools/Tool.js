@@ -46,8 +46,8 @@ common.setSecondaryColor = function (color) {
 
 common.newVersion = function (layer) {
   var state = store.getState()
-  var frame = state.Editor.frames[layer.frame]
-  var layers = state.Editor.layers
+  var frame = state.frames[layer.frame]
+  var layers = state.layers
   var context = frame.context
   context.canvas.width = context.canvas.width // clean
   frame.layers.forEach(function (index) {

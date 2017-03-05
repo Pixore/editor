@@ -6,7 +6,7 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
 const WebpackDevServer = require('webpack-dev-server')
 const chalk = require('chalk')
 const config = require('../config/webpack.config.js')
-const { PORT } = require('../config/environment.js')
+const { PORT, PIXORE_PATH } = require('../config/environment.js')
 const { rewriteListen } = require('../config/webpackDevServer')
 
 let compiler
@@ -75,7 +75,8 @@ const onListen = (err, result) => {
     return console.log(err)
   }
   console.log(chalk.cyan('Starting the development server...'))
-  console.log()
+  console.log(chalk.cyan('PORT: ', PORT))
+  console.log(chalk.cyan('PATH: ', PIXORE_PATH))
 }
 
 const run = () =>

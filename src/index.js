@@ -1,5 +1,4 @@
 import './style/main.styl'
-import './polyfill'
 
 window.hasVal = (val) => {
   return typeof val !== 'undefined' && val !== null
@@ -52,7 +51,7 @@ ReactDOM.render((
     <Tooltip />
     <Provider store={store}>
       <Router history={browserHistory} >
-        <Route path='/' component={Editor} />
+        <Route path='/editor' component={Editor} />
       </Router>
     </Provider>
   </div>
