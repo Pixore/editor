@@ -1,6 +1,6 @@
 import React from 'react'
-import { imageSmoothingDisabled } from '../../../../utils/canvas'
-
+import { imageSmoothingDisabled, clean } from '../../../../utils/canvas'
+import { getContext } from '../../../../constants'
 const obj = {}
 
 obj.displayName = 'Layer'
@@ -30,19 +30,15 @@ obj.shouldComponentUpdate = function (nextProps) {
   //   || nextProps.size.height !== this.props.size.height
 }
 
-obj.clean = function (context) {
-  context.canvas.width = context.canvas.width
-}
-
 obj.paint = function (context, artboard, layer) {
   context = context || this.state.context
   artboard = artboard || this.props.artboard
   layer = layer || this.props.layer
   let width = (layer.width * artboard.scale)
   let height = (layer.height * artboard.scale)
-  this.clean(context)
+  clean(context)
   imageSmoothingDisabled(context)
-  context.drawImage(layer.context.canvas,
+  context.drawImage(getContext(layer.id).canvas,
     0, 0, layer.width, layer.height,
     artboard.x, artboard.y, width, height)
 }

@@ -92,7 +92,6 @@ obj.componentDidMount = function () {
 obj.setContextType = function (type, context) {
   let state = {}
   let $canvas = $(context.canvas)
-  console.log(type, 'set')
   state[type] = {
     context,
     $canvas
@@ -100,8 +99,8 @@ obj.setContextType = function (type, context) {
   this.setState(state)
 
   if (type === 'preview') {
-    $canvas.off('mousedown.preview').on('mousedown.preview', this.onMouseDown, false)
-    $canvas.off('mousemove.preview').on('mousemove.preview', this.onMouseMove, false)
+    $canvas.offOn('mousedown.preview', this.onMouseDown, false)
+    $canvas.offOn('mousemove.preview', this.onMouseMove, false)
   }
 }
 
@@ -140,7 +139,6 @@ obj.render = function () {
     layer,
     setContext
   }
-    // {this.getLayers({width, height, artboard, layer, setContext})}
   return <div style={style} className='canvas' onWheel={this.onWheel}>
     <Background {...{width, height, artboard, layer, setContext}} />
     <Main {...props} />

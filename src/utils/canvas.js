@@ -116,10 +116,15 @@ export function noTransparent (context, scale, transparent) {
   return context
 }
 
-export function getColorPixel (layer, cord) {
+export function getColorPixel (layer, cord, context) {
   var index = (cord.x + cord.y * layer.width) * 4
-  var imageData = getImageData(layer.context)
+  var imageData = getImageData(context)
   if (index >= 0 && index <= imageData.length) {
     return `rgba(${imageData[index]}, ${imageData[index + 1]}, ${imageData[index + 2]}, ${imageData[index + 3] / 255})`
   }
+}
+
+export const clean = canvas => {
+  canvas.width = canvas.width
+  return canvas
 }

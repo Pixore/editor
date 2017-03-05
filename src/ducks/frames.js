@@ -1,6 +1,7 @@
 import { cuid } from 'react-dynamic-layout/lib'
 import { add, update, remove, addChild } from 'react-dynamic-layout/lib/store/reducer'
 import { shiftPositions } from '../utils/ducks'
+import { addContext } from '../constants'
 import { getNewContext } from '../utils/canvas'
 
 const ADD_FRAME = 'ADD_FRAME'
@@ -40,20 +41,21 @@ export const addFrame = ({
   height,
   sprite,
   layers = [],
-  context = getNewContext(width, height),
   version = 0
-}) => ({
-  type: ADD_FRAME,
-  payload: {
-    id,
-    width,
-    height,
-    sprite,
-    layers,
-    context,
-    version
+}) => {
+  addContext(id, getNewContext({width, height}))
+  return {
+    type: ADD_FRAME,
+    payload: {
+      id,
+      width,
+      height,
+      sprite,
+      layers,
+      version
+    }
   }
-})
+}
 
 export const addLayerFrame = (frame, layer) => ({
   type: ADD_LAYER_FRAME,

@@ -1,9 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { imageSmoothingDisabled } from '../../../utils/canvas'
+import { imageSmoothingDisabled, clean } from '../../../utils/canvas'
+import { getContext } from '../../../constants'
 
 const obj = {}
 obj.displayName = 'Sprite'
+
+obj.propTypes = {
+  style: React.PropTypes.object.isRequired,
+  width: React.PropTypes.number.isRequired,
+  height: React.PropTypes.number.isRequired,
+  frames: React.PropTypes.object.isRequired,
+  interval: React.PropTypes.number.isRequired,
+  filter: React.PropTypes.array.isRequired
+}
 
 obj.render = function () {
   return <canvas
@@ -26,22 +36,21 @@ obj.componentDidMount = function () {
 }
 
 obj.shouldComponentUpdate = function (nextProps, nextState) {
-  var update = this.props.width !== nextProps.width ||
-    this.props.height !== nextProps.height ||
-    this.props.style !== nextProps.style
-  if (nextState.context && nextProps.frames && nextProps.frames[0] &&
-    (
-      this.props.interval !== nextProps.interval ||
-      update ||
-      this.props.frames.length !== nextProps.frames.length
-    )
-  ) {
+  const isNewWidth = this.props.width !== nextProps.width
+  const isNewHeight = this.props.height !== nextProps.height
+
+  const isNewInterval = this.props.interval !== nextProps.interval
+  const isNewLength = this.props.frames.length !== nextProps.frames.length
+  const update = isNewWidth || isNewHeight
+  const reInit = !update && (isNewInterval || isNewLength)
+  if (nextState.context && reInit) {
     this.index = 0
     setTimeout(() => {
       this.initInterval(nextProps, nextState)
     }, 500)
+  } else if (!update && nextProps.filter.length === 1) {
+    this.paint(nextState.context, getContext(nextProps.filter[0]).canvas)
   }
-
   return update
 }
 obj.initInterval = function (props, state) {
@@ -50,27 +59,24 @@ obj.initInterval = function (props, state) {
     this.interval = clearInterval(this.interval)
     this.interval = setInterval(this.onInterval, props.interval)
   } else {
-    this.paint(state.context, props.frames[this.props.filter[0]].context.canvas)
+    this.paint(state.context, getContext(this.props.filter[0]).canvas)
   }
 }
 
 obj.onInterval = function () {
-  this.paint(this.state.context, this.props.frames[this.props.filter[this.index]].context.canvas)
+  this.paint(this.state.context, getContext(this.props.filter[this.index]).canvas)
   this.index++
   if (this.index > this.props.filter.length - 1) {
     this.index = 0
   }
 }
 obj.paint = function (context, frame) {
-  this.clean(context)
+  clean(context.canvas)
   imageSmoothingDisabled(context)
   context.drawImage(frame,
     0, 0, frame.width, frame.height,
     0, 0, context.canvas.width, context.canvas.height
   )
-}
-obj.clean = function (context) {
-  context.canvas.width = context.canvas.width
 }
 const Sprite = React.createClass(obj)
 

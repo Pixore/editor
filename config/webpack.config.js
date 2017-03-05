@@ -96,7 +96,7 @@ if (isProd) {
     require.resolve('./polyfills'),
     APP_PATH
   ]
-  devtool = 'source-map'
+  devtool = 'cheap-source-map'
   plugins.push(
     new HtmlWebpackPlugin({
       title: 'Pixore',

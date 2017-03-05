@@ -40,11 +40,11 @@ obj.onMouseMove = function (evt) {
   }
 }
 obj.clean = function (x, y) {
-  this.layer.context.clearRect(x, y, 1, 1)
+  this.context.clearRect(x, y, 1, 1)
 }
 obj.paint = function (x, y) {
-  this.layer.context.fillStyle = color
-  this.layer.context.fillRect(x, y, 1, 1)
+  this.context.fillStyle = color
+  this.context.fillRect(x, y, 1, 1)
 }
 obj.onMouseUp = function (evt) {
   $window.off('mouseup.upCanvas')

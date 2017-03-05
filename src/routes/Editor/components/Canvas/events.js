@@ -1,4 +1,9 @@
-import { calculatePosition, validCord, getPreviewSize } from '../../../../utils/canvas'
+import {
+  calculatePosition,
+  validCord,
+  getPreviewSize,
+  clean as cleanCanvas
+} from '../../../../utils/canvas'
 import { MIDDLE_CLICK, RIGHT_CLICK, LEFT_CLICK } from '../../../../constants'
 import * as tools from './tools'
 
@@ -18,7 +23,8 @@ export const onMouseMove = function (evt) {
 }
 
 export const clean = function (context) {
-  context.canvas.width = context.canvas.width
+  cleanCanvas(context.canvas)
+  return context
 }
 
 export const paintPreview = function (cord, context, artboard) {
@@ -49,7 +55,6 @@ export const center = function (stats) {
   stats = stats || this.state.stats
   let { sprite } = this.props
   let size = getPreviewSize(stats.width, stats.height, sprite.width, sprite.height)
-  console.log(size, stats, sprite)
   this.props.setSpriteArtboard(this.props.sprite.id, {
     scale: floor(size.scale),
     x: Number.parseInt(stats.left + size.marginLeft),
@@ -65,20 +70,22 @@ export const onCenter = function () {
 
 export const onMouseDown = function (evt) {
   let cord
-  let {$canvas, context} = this.state.preview
+  const { $canvas, context } = this.state.preview
+  const { sprite, layer, tool } = this.props
   evt.stopImmediatePropagation()
   evt.preventDefault()
-  cord = calculatePosition(this.props.sprite.artboard, evt.clientX, evt.clientY)
+  cord = calculatePosition(sprite.artboard, evt.clientX, evt.clientY)
   if (!validCord(this.props.layer, cord)) {
     if (evt.which === RIGHT_CLICK) {
       this.openContextMenu(evt)
-    } else if (this.state.activeContextMenu) {
+    } else if (this.state.activeContextMenu) { // is open the ContextMenu?
       this.setState({
         activeContextMenu: false
       })
     }
     return
   } else if (this.state.activeContextMenu) {
+    // if ContextMenu is open, close it
     this.setState({
       activeContextMenu: false
     })
@@ -87,11 +94,11 @@ export const onMouseDown = function (evt) {
     this.clean(context)
     this.offMousePreview($canvas)
 
-    tools[this.props.tool].onMouseDownInit(
+    tools[tool].onMouseDownInit(
       evt,
       cord,
-      this.props.layer,
-      this.props.sprite.artboard,
+      layer,
+      sprite.artboard,
       {
         main: this.state.main.context,
         preview: this.state.preview.context,
@@ -120,8 +127,8 @@ export const onDrag = function () {
 }
 
 export const offMousePreview = function ($canvas) {
-  $canvas.off('mousemove.preview').off('mouseup.preview').on('mouseup.preview', () => {
-    $canvas.off('mouseup.preview').on('mousemove.preview', this.onMouseMove, false)
+  $canvas.off('mousemove.preview').offOn('mouseup.preview', () => {
+    $canvas.off('mouseup.preview').offOn('mousemove.preview', this.onMouseMove, false)
   }, false)
 }
 

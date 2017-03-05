@@ -1,13 +1,12 @@
 import React from 'react'
 
-import { imageSmoothingDisabled } from '../../../../utils/canvas'
+import { getContext } from '../../../../constants'
+import { imageSmoothingDisabled, clean } from '../../../../utils/canvas'
 const obj = {}
 
 obj.displayName = 'Main'
 
-obj.getInitialState = function () {
-  return {}
-}
+obj.getInitialState = () => ({})
 
 obj.componentDidMount = function () {
   let context = this.refs.canvas.getContext('2d')
@@ -16,22 +15,21 @@ obj.componentDidMount = function () {
 }
 
 obj.shouldComponentUpdate = function (nextProps, nextState) {
-  if (this.state && this.state.context && (nextProps.layer.version !== this.props.layer.version || this.props.artboard !== nextProps.artboard || this.props.layer.index !== nextProps.layer.index)) {
+  const isAnotherLayer = this.props.layer.id !== nextProps.layer.id
+  const isAnotherArtboard = this.props.artboard !== nextProps.artboard
+  const isNewVersion = nextProps.layer.version !== this.props.layer.version
+  if (this.state && this.state.context && isNewVersion) {
     this.paint(nextState.context, nextProps.artboard, nextProps.layer)
   }
-  return true
-  // console.log('shouldComponentUpdate',nextProps.size.width !== this.props.size.width
-  //   || nextProps.size.height !== this.props.size.height)
-  // return nextProps.size.width !== this.props.size.width
-  //   || nextProps.size.height !== this.props.size.height
+  return isAnotherLayer && isAnotherArtboard
 }
 
 obj.paint = function (context, artboard, layer) {
   let width = (layer.width * artboard.scale)
   let height = (layer.height * artboard.scale)
-  this.clean(context)
+  clean(context.canvas)
   imageSmoothingDisabled(context)
-  context.drawImage(layer.context.canvas,
+  context.drawImage(getContext(layer.id).canvas,
     0, 0, layer.width, layer.height,
     artboard.x, artboard.y, width, height)
 }
@@ -40,10 +38,6 @@ obj.componentDidUpdate = function () {
   if (this.state && this.state.context && this.props.layer && this.props.artboard) {
     this.paint(this.state.context, this.props.artboard, this.props.layer)
   }
-}
-
-obj.clean = function (context) {
-  context.canvas.width = context.canvas.width
 }
 
 obj.render = function () {

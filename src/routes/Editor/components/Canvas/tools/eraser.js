@@ -26,7 +26,7 @@ obj.clean = function (x, y) {
     (x * this.artboard.scale) + this.artboard.x,
     (y * this.artboard.scale) + this.artboard.y,
     this.artboard.scale, this.artboard.scale)
-  this.layer.context.clearRect(x, y, 1, 1)
+  this.context.clearRect(x, y, 1, 1)
 }
 obj.onMouseMove = function (evt) {
   if (this.clicked) {

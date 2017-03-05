@@ -64,14 +64,13 @@ Selector.prototype.on = function (name, handler, bind = true) {
       this[i]._events[name][suffix] = bind ? handler.bind(this[i]) : handler
       this[i].addEventListener(name, this[i]._events[name][suffix])
     } else {
-      console.log(this[i]._events[name][suffix])
       console.error('Event wrong name', arguments)
     }
   }
   return this
 }
 
-Selector.prototype.offEach = function (suffix, i) {
+Selector.prototype.offEach = function (name, suffix, i) {
   if (!hasVal(suffix)) {
     if (hasVal(this[i]._events[name])) {
       for (let i in this[i]._events[name]) {
@@ -91,11 +90,15 @@ Selector.prototype.offEach = function (suffix, i) {
     delete this[i]._events[name][suffix]
   }
 }
+Selector.prototype.offOn = function (name, handler, bind = true) {
+  return this.off(name).on(name, handler, bind)
+}
+
 Selector.prototype.off = function (name) {
   var suffix = name.split('.')[1]
   name = name.split('.')[0]
   for (let i = 0; i < this.length; i++) {
-    this.offEach(suffix, i)
+    this.offEach(name, suffix, i)
   }
   return this
 }

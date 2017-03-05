@@ -22,33 +22,37 @@ obj.componentDidMount = function () {
 }
 
 obj.render = function () {
-  // let style = {
-  //   marginLeft: this.state.marginLeft,
-  //   marginTop: this.state.marginTop,
-  //   width: this.props.width,
-  //   height: this.props.height
-  // }
-  const sprite = this.props.sprites[this.props.sprite]
-  let valid = sprite &&
+  const {
+    sprites,
+    frames,
+    layers,
+    tool,
+    style,
+    width,
+    height
+  } = this.props
+
+  const sprite = sprites[this.props.sprite]
+  const valid = sprite &&
     sprite.frame &&
     Number.isInteger(sprite.layer)
   if (!valid) {
     return <div />
   }
-  return <div style={this.props.style} className='content-canvas'>
+  const frame = frames[sprite.frame]
+  return <div style={style} className='content-canvas'>
     <Canvas
-      width={this.props.width}
-      height={this.props.height}
+      width={width}
+      height={height}
       sprite={sprite}
-      frame={this.props.frames[sprite.frame]}
-      layer={this.props.layers[this.props.frames[sprite.frame].layers[sprite.layer]]}
-      layers={this.props.layers}
+      frame={frame}
+      layer={layers[frame.layers[sprite.layer]]}
+      layers={layers}
       primaryColor={sprite.primaryColor}
       secondaryColor={sprite.secondaryColor}
-      tool={this.props.tool}
+      tool={tool}
     />
   </div>
-  // artboard={this.props.sprites[this.props.sprite].artboard}
 }
 
 function mapStateToProps (state) {

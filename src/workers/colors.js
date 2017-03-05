@@ -1,6 +1,7 @@
 import colorsWorker from './colors.worker'
 import { getImageData } from '../utils/canvas'
 import { store } from '../store'
+import { getContext } from '../constants'
 
 const cbs = {
   transparent: [],
@@ -11,12 +12,12 @@ const colors = colorsWorker()
 colors.onmessage = onMessage
 
 export const getTransparentColor = function (sprite, cb) {
-  const state = store.getState()
-  const frames = state.sprites[sprite].frames
+  const { sprites } = store.getState()
+  const frames = sprites[sprite].frames
 
   let dataList = []
   for (let i = 0; i < frames.length; i++) {
-    dataList.push(getImageData(state.frames[frames[i]].context))
+    dataList.push(getImageData(getContext(frames[i])))
   }
   colors.postMessage({type: 'transparent', data: dataList})
   cbs.transparent.push(cb)
@@ -38,8 +39,8 @@ export const getSpritePalette = (sprite, transparent = false) => new Promise(res
   for (let i = 0; i < frames.length; i++) {
     let layers = state.frames[frames[i]].layers
     for (let j = 0; j < layers.length; j++) {
-      // console.log(typeof state.frames[layers[j]], layers[j], j, layers, )
-      dataList.push(getImageData(state.layers[layers[j]].context))
+      console.log(layers[j], layers, getContext(layers[j]))
+      dataList.push(getImageData(getContext(layers[j])))
     }
   }
 

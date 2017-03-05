@@ -2,13 +2,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { imageSmoothingDisabled } from '../../../utils/canvas'
+import { imageSmoothingDisabled, clean } from '../../../utils/canvas'
 
 const obj = {}
 obj.displayName = 'Context'
 
-obj.clean = function (context) {
-  context.canvas.width = context.canvas.width
+obj.propTypes = {
+  width: React.PropTypes.number.isRequired,
+  height: React.PropTypes.number.isRequired,
+  image: React.PropTypes.object.isRequired
 }
 
 obj.getInitialState = function () {
@@ -47,7 +49,7 @@ obj.shouldComponentUpdate = function (nextProps, nextState) {
 }
 obj.paint = function (image) {
   var context = this.state.context
-  this.clean(context)
+  clean(context)
   imageSmoothingDisabled(context)
   context.drawImage(image,
     0, 0, image.width, image.height,
@@ -58,7 +60,11 @@ obj.componentDidUpdate = function () {
   this.initContext(this.props)
 }
 obj.render = function () {
-  return <canvas className={this.props.className} style={this.props.style} height={this.props.height} width={this.props.width} />
+  return <canvas
+    className={this.props.className}
+    style={this.props.style}
+    height={this.props.height}
+    width={this.props.width} />
 }
 
 const Context = React.createClass(obj)

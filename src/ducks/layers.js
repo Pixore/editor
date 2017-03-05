@@ -1,6 +1,6 @@
 import { cuid } from 'react-dynamic-layout/lib'
 import { add, update, remove } from 'react-dynamic-layout/lib/store/reducer'
-// import { editProp, updateArrayItem } from 'utils/ducks'
+import { addContext } from '../constants'
 import { getNewContext } from '../utils/canvas'
 
 const ADD_LAYER = 'ADD_LAYER'
@@ -25,25 +25,26 @@ function reducer (state = initialState, {type, payload}) {
 }
 
 export const addLayer = ({
+  id = cuid(),
   width,
   height,
   sprite,
   frame,
-  context = getNewContext(width, height),
-  id = cuid(),
   version = 0
-}) => ({
-  type: ADD_LAYER,
-  payload: {
-    width,
-    height,
-    sprite,
-    frame,
-    context,
-    id,
-    version
+}) => {
+  addContext(id, getNewContext({width, height}))
+  return {
+    type: ADD_LAYER,
+    payload: {
+      width,
+      height,
+      sprite,
+      frame,
+      id,
+      version
+    }
   }
-})
+}
 
 export const removeLayer = layer => ({
   type: REMOVE_LAYER,

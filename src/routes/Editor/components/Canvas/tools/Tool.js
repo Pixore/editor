@@ -1,5 +1,5 @@
 import { store } from '../../../../../store'
-import { cloneContext } from '../../../../../utils/canvas'
+import { cloneContext, clean } from '../../../../../utils/canvas'
 import {
   setSpriteSecondaryColor,
   setSpritePrimaryColor,
@@ -9,7 +9,7 @@ import {
   newFrameVersion
 } from '../../../../../ducks'
 
-import { RIGHT_CLICK } from '../../../../../constants/index'
+import { RIGHT_CLICK, getContext } from '../../../../../constants'
 
 const { abs } = Math
 const common = {}
@@ -45,18 +45,17 @@ common.setSecondaryColor = function (color) {
 }
 
 common.newVersion = function (layer) {
-  var state = store.getState()
-  var frame = state.frames[layer.frame]
-  var layers = state.layers
-  var context = frame.context
-  context.canvas.width = context.canvas.width // clean
-  frame.layers.forEach(function (index) {
-    context.drawImage(layers[index].context.canvas,
+  const state = store.getState()
+  const frame = state.frames[layer.frame]
+  const context = getContext(frame.id)
+  clean(context.canvas)
+  frame.layers.forEach(function (id) {
+    context.drawImage(getContext(id).canvas,
       0, 0, frame.width, frame.height,
       0, 0, frame.width, frame.height
     )
   })
-  store.dispatch(newLayerVersion(layer.index))
+  store.dispatch(newLayerVersion(layer.id))
   store.dispatch(newFrameVersion(layer.frame))
   store.dispatch(newSpriteVersion(layer.sprite))
 }
@@ -84,14 +83,16 @@ common.lineBetween = function (x1, y1, x2, y2, fn) {
 common.onMouseDown = () => console.log('Create onMouseDown function')
 
 common.onMouseDownInit = function (evt, initCord, layer, artboard, {main, preview, background, mask}) {
+  const context = getContext(layer.id)
   this.layer = layer
-  this.prevStatus = cloneContext(this.layer.context)
+  this.prevStatus = cloneContext(context)
   this.artboard = artboard
   this.initCord = initCord
   this.main = main
   this.preview = preview
   this.background = background
   this.mask = mask
+  this.context = context
   this.onMouseDown(evt)
 }
 

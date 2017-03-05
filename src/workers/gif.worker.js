@@ -8,7 +8,6 @@ function renderFrame (frame) {
   } else {
     encoder.firstFrame = false
   }
-  console.log(frame.transparent)
   encoder.setTransparent(frame.transparent)
   encoder.setRepeat(frame.repeat)
   encoder.setDelay(frame.delay)

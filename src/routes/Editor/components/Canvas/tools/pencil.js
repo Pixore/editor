@@ -15,9 +15,9 @@ obj.onMouseDown = function (evt) {
   } else {
     at = this.paint
   }
-  $window.off('mouseup.upCanvas').on('mouseup.upCanvas', this.onMouseUp, false)
-  $window.off('mouseout.leaveCanvas').on('mouseout.leaveCanvas', this.onMouseLeave, false)
-  $window.off('mousemove.moveCanvas').on('mousemove.moveCanvas', this.onMouseMove, false)
+  $window.offOn('mouseup.upCanvas', this.onMouseUp, false)
+  $window.offOn('mouseout.leaveCanvas', this.onMouseLeave, false)
+  $window.offOn('mousemove.moveCanvas', this.onMouseMove, false)
 }
 obj.onMouseLeave = function (evt) {
   let el = evt.toElement || evt.relatedTarget
@@ -27,20 +27,20 @@ obj.onMouseLeave = function (evt) {
   lastPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
 }
 obj.clean = function (x, y) {
-  this.main.clearRect(
+  this.preview.clearRect(
     (x * this.artboard.scale) + this.artboard.x,
     (y * this.artboard.scale) + this.artboard.y,
     this.artboard.scale, this.artboard.scale)
-  this.layer.context.clearRect(x, y, 1, 1)
+  this.context.clearRect(x, y, 1, 1)
 }
 obj.paint = function (x, y) {
-  this.main.fillStyle = color
-  this.main.fillRect(
+  this.preview.fillStyle = color
+  this.preview.fillRect(
     (x * this.artboard.scale) + this.artboard.x,
     (y * this.artboard.scale) + this.artboard.y,
     this.artboard.scale, this.artboard.scale)
-  this.layer.context.fillStyle = color
-  this.layer.context.fillRect(x, y, 1, 1)
+  this.context.fillStyle = color
+  this.context.fillRect(x, y, 1, 1)
 }
 obj.onMouseMove = function (evt) {
   if (this.clicked) {

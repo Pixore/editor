@@ -101,7 +101,6 @@ function componentToHex (color) {
 }
 
 export function rgbToHex (r, g, b) {
-  console.log(r, g, b)
   return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b)
 }
 
