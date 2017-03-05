@@ -3,11 +3,12 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
-const { isProd, MAIN_TEMPLATE, APP_PATH, PUBLIC_PATH } = require('./src/config/environment')
+const { isProd, MAIN_TEMPLATE, APP_PATH, PUBLIC_PATH, PIXORE_PATH } = require('./environment')
 
 const plugins = [
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    'process.env.PIXORE_PATH': JSON.stringify(process.env.PIXORE_PATH)
   })
 ]
 let devtool
@@ -20,7 +21,10 @@ const modules = {
     test: /\.js$/,
     loader: 'eslint-loader',
     enforce: 'pre',
-    exclude: /node_modules/
+    exclude: /node_modules/,
+    options: {
+      cacheDirectory: true
+    }
   }, {
     test: /\.js$/,
     exclude: /node_modules/,
@@ -37,8 +41,8 @@ const modules = {
   }, {
     test: /\.styl$/,
     loader: ExtractTextPlugin.extract({
-      fallbackLoader: 'style-loader',
-      loader: [
+      fallback: 'style-loader',
+      use: [
         'css-loader',
         'stylus-loader'
       ]
@@ -64,6 +68,8 @@ const resolve = {
   extensions: ['.js', '.css', '.styl', '.jade']
 }
 const output = {
+  pathinfo: true,
+  publicPath: path.join('/', process.env.PIXORE_PATH),
   path: PUBLIC_PATH,
   filename: 'bundle.js'
 }
@@ -86,7 +92,8 @@ if (isProd) {
   )
 } else {
   entry = [
-    require.resolve('react-dev-utils/webpackHotDevClient.js'),
+    require.resolve('./webpackHotDevClient'),
+    require.resolve('./polyfills'),
     APP_PATH
   ]
   devtool = 'source-map'
@@ -97,24 +104,11 @@ if (isProd) {
       template: MAIN_TEMPLATE
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new WatchMissingNodeModulesPlugin(path.resolve('node_modules')),
+    new WatchMissingNodeModulesPlugin(path.resolve('../node_modules')),
     new ExtractTextPlugin({
       filename: '[name].css'
     })
   )
-  // devServer = {
-  //   stats: {
-  //     assets: false,
-  //     colors: true,
-  //     version: false,
-  //     hash: false,
-  //     timings: false,
-  //     chunks: false,
-  //     chunkModules: false
-  //   },
-  //   // historyApiFallback: true,
-  //   port: 8001
-  // }
 }
 
 module.exports = {
