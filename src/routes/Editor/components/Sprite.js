@@ -40,7 +40,7 @@ obj.shouldComponentUpdate = function (nextProps, nextState) {
   const isNewHeight = this.props.height !== nextProps.height
 
   const isNewInterval = this.props.interval !== nextProps.interval
-  const isNewLength = this.props.frames.length !== nextProps.frames.length
+  const isNewLength = this.props.filter.length !== nextProps.filter.length
   const update = isNewWidth || isNewHeight
   const reInit = !update && (isNewInterval || isNewLength)
   if (nextState.context && reInit) {
@@ -54,7 +54,7 @@ obj.shouldComponentUpdate = function (nextProps, nextState) {
   return update
 }
 obj.initInterval = function (props, state) {
-  if (props.frames.length > 1) {
+  if (props.filter.length > 1) {
     this.index = 0
     this.interval = clearInterval(this.interval)
     this.interval = setInterval(this.onInterval, props.interval)
