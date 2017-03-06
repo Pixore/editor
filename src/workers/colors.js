@@ -39,7 +39,6 @@ export const getSpritePalette = (sprite, transparent = false) => new Promise(res
   for (let i = 0; i < frames.length; i++) {
     let layers = state.frames[frames[i]].layers
     for (let j = 0; j < layers.length; j++) {
-      console.log(layers[j], layers, getContext(layers[j]))
       dataList.push(getImageData(getContext(layers[j])))
     }
   }

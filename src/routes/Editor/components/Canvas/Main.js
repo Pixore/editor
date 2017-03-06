@@ -18,10 +18,11 @@ obj.shouldComponentUpdate = function (nextProps, nextState) {
   const isAnotherLayer = this.props.layer.id !== nextProps.layer.id
   const isAnotherArtboard = this.props.artboard !== nextProps.artboard
   const isNewVersion = nextProps.layer.version !== this.props.layer.version
-  if (this.state && this.state.context && isNewVersion) {
+  const rePaint = isNewVersion || isAnotherArtboard || isAnotherLayer
+  if (this.state && this.state.context && rePaint) {
     this.paint(nextState.context, nextProps.artboard, nextProps.layer)
   }
-  return isAnotherLayer && isAnotherArtboard
+  return false
 }
 
 obj.paint = function (context, artboard, layer) {

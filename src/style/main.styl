@@ -74,11 +74,18 @@ img
     //z-index 0
     //top 0
     //left 0
-    &>.background, &>.layer, &>.canvas,&>.mask,&>.preview,.content-preview-animate
+    &>.background, &>.main, &>.canvas,&>.mask,&>.preview,.content-preview-animate
       position absolute
       top 0
       left 0
-    &>.mask
+    .background
+      z-index: 0
+    .main
+      z-index: 1
+    .preview
+      z-index: 2
+    .mask
+      z-index: 3
       pointer-events none
 .backdrop-context-menu
   width 100%
@@ -162,7 +169,7 @@ img
       transform scale(1.1)
       box-shadow 0 0 5px rgba(0,0,0,0.7);
       transform-origin 50%
-      
+
 @import './input.styl'
 @import './tooltip.styl'
 @import './Tools.styl'
