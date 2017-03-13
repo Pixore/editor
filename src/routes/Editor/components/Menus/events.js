@@ -1,7 +1,8 @@
-import http from 'http'
+import http from '../../../../utils/http'
 // import React from 'react'
 import Gif from '../../../../utils/gif/gif'
 import { noTransparent } from '../../../../utils/canvas'
+import { getContext } from '../../../../constants'
 // import { ModalManager } from 'react-dynamic-modal'
 // import Login from '../../../../modals/Login'
 
@@ -21,10 +22,11 @@ export const onSave = function () {
   // if (!this.props.user) {
   //   return ModalManager.open(<Login onLogin={this.onLogin} />)
   // }
+  const { frames, sprite } = this.props
+
   let self = this
-  let sprite = this.props.sprite
   let numFrames = sprite.frames.length
-  let numLayers = this.props.frames[sprite.frames[0]].layers.length
+  let numLayers = frames[sprite.frames[0]].layers.length
   let isGif = sprite.frames.length > 1
   let isNew = !sprite._id
   let context = document.createElement('canvas').getContext('2d')
@@ -44,7 +46,7 @@ export const onSave = function () {
   })
   isGif
     ? this.generateGif(sprite, 1, onGeneratePreview)
-    : this.props.frames[sprite.frames[0]].context.canvas.toBlob(onGeneratePreview)
+    : getContext(sprite.frames[0]).canvas.toBlob(onGeneratePreview)
 
   function onGeneratePreview (blob) {
     files.push({file: blob, name: 'preview.' + (isGif ? 'gif' : 'png')})
@@ -63,7 +65,7 @@ export const onSave = function () {
     files.push({file: blob, name: 'sprite.png'})
 
     http.upload(url, {
-      name: sprite.name,
+      title: sprite.name,
       width: sprite.width,
       height: sprite.height,
       frames: numFrames,
@@ -76,7 +78,7 @@ export const onSave = function () {
 
   function onUpload (result) {
     if (isNew) {
-      this.props.setSpriteId(this.props.sprite.id, result.description)
+      this.props.setSpriteId(sprite.id, result.description)
       this.props.saveEditor()
     }
     console.log('save result', result)
@@ -111,15 +113,16 @@ export const generateGif = function (sprite, scale, cb) {
 }
 
 export const saveFrame = function (index) {
-  let frame = this.props.frames[index]
+  const { frames, layers } = this.props
+  let frame = frames[index]
   let context = document.createElement('canvas').getContext('2d')
   context.canvas.width = frame.layers.length * frame.width
   context.canvas.height = frame.height
   frame.layers.forEach(onForEach.bind(this))
 
   function onForEach (item, index) {
-    let layer = this.props.layers[item]
-    context.drawImage(layer.context.canvas,
+    let layer = layers[item]
+    context.drawImage(getContext(layer.id).canvas,
       0, 0, layer.width, layer.height,
       index * layer.width, 0, layer.width, layer.height
     )

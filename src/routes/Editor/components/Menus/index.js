@@ -87,6 +87,8 @@ obj.render = function () {
 
 function mapStateToProps (state) {
   return {
+    frames: state.frames,
+    layers: state.layers,
     spriteId: state.editor.sprite,
     sprite: state.sprites[state.editor.sprite],
     user: state.user
