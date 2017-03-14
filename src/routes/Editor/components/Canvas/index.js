@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {
   setSpriteArtboard
 } from '../../../../ducks'
-import Menu from '../Menu'
+import Menu from '../../../../components/Menu'
 import Background from './Background'
 import Preview from './Preview'
 import Main from './Main'

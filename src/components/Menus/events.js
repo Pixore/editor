@@ -1,8 +1,8 @@
-import http from '../../../../utils/http'
+import http from '../../utils/http'
 // import React from 'react'
-import Gif from '../../../../utils/gif/gif'
-import { noTransparent } from '../../../../utils/canvas'
-import { getContext } from '../../../../constants'
+import Gif from '../../utils/gif/gif'
+import { noTransparent } from '../../utils/canvas'
+import { getContext } from '../../constants'
 // import { ModalManager } from 'react-dynamic-modal'
 // import Login from '../../../../modals/Login'
 

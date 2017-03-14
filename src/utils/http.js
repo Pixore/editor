@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-function parseJSON (response) {
-  return response.data
-}
+const parseJSON = response => response.data
+
 function checkStatus (response) {
   if (response.status >= 200 && response.status < 300) {
     return response
@@ -12,8 +11,8 @@ function checkStatus (response) {
     throw error
   }
 }
-function request (url, method, body, headers = true) {
-  let promise = axios({
+const request = (url, method, body, headers = true) =>
+  axios({
     url,
     headers: headers ? {
       'Accept': 'application/json',
@@ -21,9 +20,9 @@ function request (url, method, body, headers = true) {
     } : undefined,
     method,
     data: body
-  }).then(checkStatus).then(parseJSON)
-  return promise
-}
+  })
+  .then(checkStatus)
+  .then(parseJSON)
 
 export const post = function (url, body) {
   return request(url, 'POST', body)
@@ -51,7 +50,7 @@ export const upload = function (url, data, files, method) {
   for (var key of form.values()) {
     console.log(typeof key)
   }
-  request(url, method, form, false)
+  return request(url, method, form, false)
 }
 
 export const sprite = {}

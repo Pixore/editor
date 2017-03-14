@@ -124,6 +124,9 @@ export function getColorPixel (layer, cord, context) {
   }
 }
 
+export const getBlob = canvas =>
+  new Promise(resolve => canvas.toBlob(resolve))
+
 export const clean = canvas => {
   canvas.width = canvas.width
   return canvas

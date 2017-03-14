@@ -21,7 +21,7 @@ import './components/Layers'
 import './components/Frames'
 import Sprites from './components/Sprites'
 import Tools from './components/Tools'
-import Menus from './components/Menus'
+import Menus from '../../components/Menus'
 import ColorPicker from './components/ColorPicker'
 
 const elementColorPickerId = cuid()

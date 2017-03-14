@@ -57,18 +57,18 @@ export const setEditorId = _id => ({
 })
 
 export const saveEditor = () => (dispatch, getState) => {
-  let state = getState()
-  let sprites = state.Editor.sprites
-    .filter(index => !!state.sprites[index]._id)
-    .map(index => state.sprites[index]._id)
-  if (state.Editor._id) {
-    return http.put('/api/editor/' + state.Editor._id, {
-      sprites
+  const { sprites, editor, editorSprites } = getState()
+  const saveSprites = editorSprites
+    .filter(index => !!sprites[index]._id)
+    .map(index => sprites[index]._id)
+  if (editor._id) {
+    return http.put('/api/editor/' + editor._id, {
+      sprites: saveSprites
     })
   } else {
     return http.post('/api/editor/', {
-      sprites
-    }).then(id => dispatch(setEditorId(id)))
+      sprites: saveSprites
+    }).then(result => dispatch(setEditorId(result._id)))
   }
 }
 

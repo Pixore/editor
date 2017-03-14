@@ -1,19 +1,18 @@
 import React from 'react'
-// import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { register } from 'react-dynamic-layout'
 
 import Name from './Name'
+import Proyect from './Project'
 import Menu from '../Menu'
-import Panel from '../Panel'
-import { noopF } from '../../../../utils/noop'
+import { noopF } from '../../utils/noop'
 import * as events from './events'
 
 import {
   saveEditor,
   setSpriteId,
   putName
-} from '../../../../ducks'
+} from '../../ducks'
 
 const obj = Object.assign({}, events)
 
@@ -64,17 +63,12 @@ obj.onSubmitName = function (name) {
 }
 
 obj.render = function () {
-  return <Panel name='Menus' style={this.state.style} dragBar={false}>
+  return <div className='header' >
     <a href='/'>
       <image className='logo' />
     </a>
     <Menu active inline>
-      <Menu child>
-        Project
-        <li >new project</li>
-        <li onClick={this.onSave}>save sprite</li>
-        <li onClick={this.props.openNewSpriteModal}>new sprite</li>
-      </Menu>
+      <Proyect />
       <Menu child>
         Sprite
         <li onClick={this.onResize}>resize</li>
@@ -82,7 +76,7 @@ obj.render = function () {
       </Menu>
     </Menu>
     <Name name={this.getName()} onSubmit={this.onSubmitName} />
-  </Panel>
+  </div>
 }
 
 function mapStateToProps (state) {

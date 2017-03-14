@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tooltipy } from '../../../../components/Tooltipy'
+import { Tooltipy } from '../Tooltipy'
 const obj = {}
 
 obj.displayName = 'Name'
