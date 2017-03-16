@@ -2,6 +2,7 @@ import { cuid } from 'react-dynamic-layout/lib'
 
 import http from '../../utils/http'
 import { wrapActionCreators } from '../../utils/ducks'
+import { getContext } from '../../constants'
 import { bindObject } from '../../utils/object'
 import { createSprite } from '../../utils/sprites'
 import { store } from '../../store'
@@ -45,23 +46,19 @@ loader.onClose = function () {
 }
 
 loader.onGetEditor = function (result) {
-  actions.setEditorId(result._id)
-  let promises = []
-  for (var index = 0; index < result.sprites.length; index++) {
-    var sprite = result.sprites[index]
-    promises.push(
-      http.get('/api/sprites/' + sprite)
-        .then(this.onGetSprite)
-        // .catch()
-        // TODO: create toast alerts
+  const { _id, sprites } = result
+  actions.setEditorId(_id)
+  Promise.all(
+    sprites.map(
+      sprite => http.get('/api/sprites/' + sprite)
+        .then(onGetSprite)
     )
-  }
-  Promise.all(promises)
+  )
     .then(this.ensure)
     .catch(console.error)
 }
 
-loader.onGetSprite = function (sprite) {
+const onGetSprite = sprite => new Promise(resolve => {
   let image = new Image()
   let width, height
   let context = document.createElement('canvas').getContext('2d')
@@ -80,52 +77,50 @@ loader.onGetSprite = function (sprite) {
   })
   actions.openSprite(sprite.id)
   actions.setCurrentSprite(sprite.id)
-  return new Promise(resolve => {
-    image.onload = () => {
+  image.onload = () => {
+    context.drawImage(image,
+      0, 0, width, height,
+      0, 0, width, height
+    )
+    actions.selectSpriteFrame(
+      sprite.id,
+      createFrameFromContext(sprite, context)
+    )
+    actions.selectSpriteLayer(sprite.id, 0)
+    for (let j = 1; j < sprite.frames; j++) {
+      context.canvas.height = height// clean
       context.drawImage(image,
-        0, 0, width, height,
+        0, j * height, width, height,
         0, 0, width, height
       )
-      actions.selectSpriteFrame(
-        sprite.id,
-        this.createFrameFromContext(sprite, context)
-      )
-      actions.selectSpriteLayer(sprite.id, 0)
-      for (let j = 1; j < sprite.frames; j++) {
-        context.canvas.height = height// clean
-        context.drawImage(image,
-          0, j * height, width, height,
-          0, 0, width, height
-        )
-        this.createFrameFromContext(sprite, context)
-      }
-      resolve()
+      createFrameFromContext(sprite, context)
     }
-    image.src = `/api/sprites/${sprite._id}/file`
-  })
-}
+    resolve()
+  }
+  image.src = `/api/sprites/${sprite._id}/file`
+})
 
-loader.createFrameFromContext = function (sprite, image) {
-  let context = document.createElement('canvas').getContext('2d')
+const createFrameFromContext = function (sprite, image) {
+  const frame = cuid()
   let contextTemp = document.createElement('canvas').getContext('2d')
-  let frame = cuid()
-  contextTemp.canvas.width = context.canvas.width = sprite.width
-  contextTemp.canvas.height = context.canvas.height = sprite.height
+  contextTemp.canvas.width = sprite.width
+  contextTemp.canvas.height = sprite.height
 
+  actions.addFrame({
+    id: frame,
+    sprite: sprite.id,
+    width: sprite.width,
+    height: sprite.height,
+    layers: []
+  })
+  const context = getContext(frame)
   for (var j = sprite.layers - 1; j >= 0; j--) {
     context.drawImage(image.canvas,
       sprite.width * j, 0, sprite.width, sprite.height,
       0, 0, sprite.width, sprite.height
     )
   }
-  actions.addFrame({
-    id: frame,
-    sprite: sprite.id,
-    width: sprite.width,
-    height: sprite.height,
-    context: context,
-    layers: []
-  })
+
   actions.addFrameSprite(
     sprite.id,
     frame
@@ -137,7 +132,7 @@ loader.createFrameFromContext = function (sprite, image) {
       sprite.width * j, 0, sprite.width, sprite.height,
       0, 0, sprite.width, sprite.height
     )
-    layer = this.createLayersFromContext(sprite, contextTemp, frame, j)
+    layer = createLayersFromContext(sprite, contextTemp, frame, j)
     actions.addLayerFrame(
       frame,
       layer
@@ -146,24 +141,22 @@ loader.createFrameFromContext = function (sprite, image) {
   return frame
 }
 
-loader.createLayersFromContext = function (sprite, image, frame, index) {
+const createLayersFromContext = function (sprite, image, frame, index) {
   const layer = cuid()
-  let context = document.createElement('canvas').getContext('2d')
-  context.canvas.width = sprite.width
-  context.canvas.height = sprite.height
-  context.drawImage(image.canvas,
-    0, 0, sprite.width, sprite.height,
-    0, 0, sprite.width, sprite.height
-  )
   actions.addLayer({
     id: layer,
-    context: context,
     width: sprite.width,
     height: sprite.height,
     sprite: sprite.id,
     frame: frame,
     layerIndex: index
   })
+  const context = getContext(layer)
+  context.drawImage(image.canvas,
+    0, 0, sprite.width, sprite.height,
+    0, 0, sprite.width, sprite.height
+  )
+
   return layer
 }
 

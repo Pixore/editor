@@ -19,8 +19,9 @@ obj.shouldComponentUpdate = function (nextProps, nextState) {
   const isAnotherArtboard = this.props.artboard !== nextProps.artboard
   const isNewVersion = nextProps.layer.version !== this.props.layer.version
   const rePaint = isNewVersion || isAnotherArtboard || isAnotherLayer
-  if (this.state && this.state.context && rePaint) {
+  if (this.state && nextState.context && rePaint) {
     this.paint(nextState.context, nextProps.artboard, nextProps.layer)
+  } else {
   }
   return false
 }
