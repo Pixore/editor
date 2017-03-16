@@ -37,9 +37,9 @@ obj.componentDidMount = function () {
 }
 
 obj.shouldComponentUpdate = function (nextProps) {
-  setTimeout(() => {
-    if (this.props.sprite && this.props.sprite.version !== nextProps.sprite.version) {
-      let spriteIndex = nextProps.sprite.id
+  if (this.props.sprite && this.props.sprite.version !== nextProps.sprite.version) {
+    setTimeout(() => {
+      const spriteIndex = nextProps.sprite.id
       if (this.props.sprite.frames.length > 1) {
         getTransparentColor(
           spriteIndex,
@@ -49,8 +49,8 @@ obj.shouldComponentUpdate = function (nextProps) {
       getSpritePalette(
         spriteIndex
       ).then(result => this.props.setCurrentPalette(spriteIndex, result.array))
-    }
-  }, 500)
+    }, 500)
+  }
   return true
 }
 
