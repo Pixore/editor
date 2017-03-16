@@ -65,7 +65,7 @@ export const onSave = function () {
     files.push({file: blob, name: 'sprite.png'})
 
     http.upload(url, {
-      title: sprite.name,
+      name: sprite.name,
       width: sprite.width,
       height: sprite.height,
       frames: numFrames,

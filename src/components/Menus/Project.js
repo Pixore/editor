@@ -91,7 +91,7 @@ const onSave = props => {
     files.push({file: blob, name: 'sprite.png'})
 
     return http.upload(url, {
-      title: sprite.name,
+      name: sprite.name,
       width: sprite.width,
       height: sprite.height,
       frames: numFrames,
