@@ -119,6 +119,10 @@ const Proyect = props => (
   </Menu>
 )
 
+Proyect.propTypes = {
+  openNewSpriteModal: React.PropTypes.func.isRequired
+}
+
 function mapStateToProps (state) {
   return {
     frames: state.frames,

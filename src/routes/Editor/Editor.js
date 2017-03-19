@@ -23,9 +23,11 @@ import Sprites from './components/Sprites'
 import Tools from './components/Tools'
 import Menus from '../../components/Menus'
 import ColorPicker from './components/ColorPicker'
+import NewSprite from '../../components/NewSprite'
 
 const elementColorPickerId = cuid()
 const modalColorPickerId = cuid()
+const modalNewSpriteId = cuid()
 
 const windowSize = {
   width: window.innerWidth,
@@ -33,10 +35,17 @@ const windowSize = {
 }
 
 export default () => <Layout name='Main' type={ROW} hiddenType={RENDER} resize={false}>
+  <Float width='200px' height='200px' x='calc(50% - 100px)' y='100px' id={modalNewSpriteId} open={false}>
+    <Layout name='NewSprite' type={ROW}>
+      <Container size={100} tabs={false}>
+        <Register type={NewSprite} props={{modalNewSpriteId}} />
+      </Container>
+    </Layout>
+  </Float>
   <Float width='65px' height='170px' x='250px' y='100px'>
     <Layout name='Float' type={ROW}>
       <Container size={100} tabs={false}>
-        <Register type={Tools} props={{text: 'Float', modalColorPickerId, elementColorPickerId}} />
+        <Register type={Tools} props={{modalColorPickerId, elementColorPickerId}} />
       </Container>
     </Layout>
   </Float>
@@ -48,7 +57,7 @@ export default () => <Layout name='Main' type={ROW} hiddenType={RENDER} resize={
     </Layout>
   </Float>
   <Container size='25px' tabs={false}>
-    <Register type={Menus} props={{ text: 'Top' }} />
+    <Register type={Menus} props={{ modalNewSpriteId }} />
   </Container>
   <Container size='calc(100% - 25px)' tabs={false}>
     <Layout type={COLUMN} name='Left'>

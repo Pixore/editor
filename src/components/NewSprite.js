@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { cuid } from 'react-dynamic-layout/lib'
 
-import Panel from './Panel'
 import {
   addSprite,
   addFrameSprite,
@@ -20,13 +19,13 @@ obj.displayName = 'NewSprite'
 
 obj.onSubmit = function (evt) {
   evt.preventDefault()
-  let sprite = this.createSprite(
+  this.createSprite(
     evt.target.name.value,
     Number(evt.target.width.value),
     Number(evt.target.height.value)
   )
   this.resetValues()
-  this.props.onClose(sprite)
+  this.props.rdCloseFloat(this.props.modalNewSpriteId)
 }
 
 obj.createSprite = function (name, width, height) {
@@ -73,16 +72,15 @@ obj.createLayer = function ({sprite, frame, context, width, height}) {
 
 obj.onClose = function (evt) {
   evt.preventDefault()
-  this.props.onClose()
+  this.props.rdCloseFloat(this.props.modalNewSpriteId)
 }
 
 obj.resetValues = function () {
   this.refs.form.name.value = 'Untitled'
 }
 
-const style = { width: 200 }
 obj.render = function () {
-  return <Panel name='New Sprite' modal style={style} modalOpen={this.props.modalOpen}>
+  return <div className='new-sprite'>
     <form className='form' onSubmit={this.onSubmit} ref='form'>
       <div className='form-group'>
         <label>Name</label>
@@ -105,7 +103,7 @@ obj.render = function () {
       <button className='btn' type='submit'>Create Sprite</button>
       <button className='btn' onClick={this.onClose}>Cancel</button>
     </form>
-  </Panel>
+  </div>
 }
 
 const NewSprite = connect(

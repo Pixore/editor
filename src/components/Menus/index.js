@@ -19,7 +19,6 @@ const obj = Object.assign({}, events)
 obj.displayName = 'Menus'
 
 obj.propTypes = {
-  openNewSpriteModal: React.PropTypes.func,
   sprite: React.PropTypes.object,
   spriteId: React.PropTypes.string
 }
@@ -62,13 +61,17 @@ obj.onSubmitName = function (name) {
   console.log(this.props.putName(this.props.sprite, name))
 }
 
+obj.openNewSpriteModal = function () {
+  this.props.rdOpenFloat(this.props.modalNewSpriteId)
+}
+
 obj.render = function () {
   return <div className='header' >
     <a href='/'>
       <image className='logo' />
     </a>
     <Menu active inline>
-      <Proyect />
+      <Proyect openNewSpriteModal={this.openNewSpriteModal} />
       <Menu child>
         Sprite
         <li onClick={this.onResize}>resize</li>
