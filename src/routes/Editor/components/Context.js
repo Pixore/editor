@@ -38,18 +38,20 @@ obj.initContext = function (props) {
   }
 }
 obj.shouldComponentUpdate = function (nextProps, nextState) {
-  if (this.props.version !== nextProps.version) {
-    this.paint(this.props.image.canvas)
-  }
-  return this.props.width !== nextProps.width ||
+  const repaint = this.props.image !== nextProps.image ||
+    this.state.context !== nextState.context ||
+    this.props.version !== nextProps.version
+  const render = this.props.width !== nextProps.width ||
     this.props.height !== nextProps.height ||
-    this.props.image !== nextProps.image ||
-    this.props.style !== nextProps.style ||
-    this.state.context !== nextState.context
+    this.props.style !== nextProps.style
+  if (!render && repaint) {
+    this.paint(nextProps.image.canvas)
+  }
+  return render
 }
 obj.paint = function (image) {
-  var context = this.state.context
-  clean(context)
+  const context = this.state.context
+  clean(context.canvas)
   imageSmoothingDisabled(context)
   context.drawImage(image,
     0, 0, image.width, image.height,
