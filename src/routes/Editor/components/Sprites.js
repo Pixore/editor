@@ -16,7 +16,14 @@ const obj = {}
 obj.displayName = 'Sprites'
 
 obj.render = function () {
-  return <div style={this.props.style} className={this.props.className + ' stack layout'}>
+  const divClassName = classNames(
+    'rdl-tabs',
+    this.props.className
+  )
+  const style = {
+    height: '100%'
+  }
+  return <div style={style} className={divClassName}>
     {this.getTabs()}
   </div>
 }
@@ -55,7 +62,7 @@ obj.getTabs = function () {
   for (let j = 0; j < this.props.filter.length; j++) {
     let sprite = this.props.sprites[this.props.filter[j]]
     let className = classNames(
-      'tab',
+      'rdl-tab',
       sprite.name.replace(' ', '-').toLowerCase(),
       { 'active': sprite.id === this.props.sprite }
     )
