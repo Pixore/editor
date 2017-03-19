@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getPreviewSize } from '../../../utils/canvas'
+import { getContext } from '../../../constants'
 import Context from './Context'
 
 import {
@@ -73,8 +74,19 @@ obj.render = function () {
   style.width = this.state.width
   style.marginLeft = this.state.marginLeft
   style.marginTop = this.state.marginTop
-  return <div onDrop={this.onDrop} draggable='true' onDragOver={this.onDragOver} onDragStart={this.onDragStart} style={style} onClick={this.onClick} className='transparent-bkg'>
-    <Context width={this.state.width} height={this.state.height} image={this.props.data.context} version={this.props.data.version} />
+  return <div
+    onDrop={this.onDrop}
+    draggable='true'
+    onDragOver={this.onDragOver}
+    onDragStart={this.onDragStart}
+    style={style}
+    onClick={this.onClick}
+    className='transparent-bkg'>
+    <Context
+      width={this.state.width}
+      height={this.state.height}
+      image={getContext(this.props.data.id)}
+      version={this.props.data.version} />
     <button className='btn btn-clone'>c</button>
     <button className='btn btn-hidden'>h</button>
     <button className='btn btn-delete'>d</button>
