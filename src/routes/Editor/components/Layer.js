@@ -49,7 +49,7 @@ obj.componentWillReceiveProps = function (nextProps) {
 
 obj.onClick = function () {
   this.props.onSelect(
-    this.props.data.id
+    this.props.index
   )
 }
 
