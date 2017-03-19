@@ -24,7 +24,7 @@ const generateGif = (sprite, scale) => new Promise(resolve => {
 
   sprite.frames.forEach(frame => gif.addFrame(
     noTransparent(getContext(frame), scale, sprite.transparent),
-    { transparent: transparent }
+    { transparent }
   ))
   gif.render()
 })

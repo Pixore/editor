@@ -222,11 +222,11 @@ GIF.prototype.getTask = function (frame) {
     repeat: this.options.repeat,
     canTransfer: browser.name === 'chrome'
   }
-  if (frame.data !== null) {
+  if (frame.data) {
     task.data = frame.data
-  } else if (frame.context !== null) {
+  } else if (frame.context) {
     task.data = this.getContextData(frame.context)
-  } else if (frame.image !== null) {
+  } else if (frame.image) {
     task.data = this.getImageData(frame.image)
   } else {
     throw new Error('Invalid frame')
