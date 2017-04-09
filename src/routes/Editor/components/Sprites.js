@@ -36,6 +36,7 @@ obj.onClickTab = function (evt, sprite) {
 
 obj.shouldComponentUpdate = function (nextProps) {
   return nextProps.filter.length !== this.props.filter.length ||
+    nextProps.sprites !== this.props.sprites ||
     nextProps.sprite !== this.props.sprite ||
     nextProps.editorId !== this.props.editorId
 }

@@ -6,7 +6,9 @@ obj.displayName = 'Name'
 
 obj.onSubmit = function (evt) {
   evt.preventDefault()
-  this.props.onSubmit(this.state.name)
+  if (this.state.name !== this.props.name) {
+    this.props.onSubmit(this.state.name)
+  }
 }
 obj.shouldComponentUpdate = function (nextProps, nextState) {
   return nextProps.name !== this.props.name || nextState.name !== this.state.name
@@ -35,7 +37,7 @@ obj.onChange = function (evt) {
 obj.render = function () {
   return <form onSubmit={this.onSubmit} className='name-form'>
     <Tooltipy text='blyat?' mode='bottom'>
-      <input className='name-sprite' onChange={this.onChange} value={this.state.name} />
+      <input className='name-sprite' onBlur={this.onSubmit} onChange={this.onChange} value={this.state.name} />
     </Tooltipy>
     <button type='submit'>submit</button>
   </form>

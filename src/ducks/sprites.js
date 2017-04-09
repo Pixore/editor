@@ -121,29 +121,22 @@ export const setCurrentPalette = (sprite, palette) => ({
   }
 })
 
-export const putName = (sprite, name) => (dispatch) => {
-  if (sprite._id) {
-    return http.sprite.putName(sprite._id, name, onPut)
-  }
-  onPut({
-    code: 0
+export const putName = (sprite, name) => dispatch => {
+  const onPut = () => dispatch({
+    type: PUT_NAME,
+    payload: {
+      id: sprite.id,
+      name
+    }
   })
+
+  if (sprite._id) {
+    return http.sprite.putName(sprite._id, name).then(onPut)
+  }
+  onPut()
   return Promise.resolve({
     code: 0
   })
-
-  function onPut (result) {
-    if (result.code !== 0) {
-      return // alert
-    }
-    dispatch({
-      type: PUT_NAME,
-      payload: {
-        id: sprite.id,
-        name
-      }
-    })
-  }
 }
 
 export const addSprites = sprites => dispatch => {
