@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { getPreviewSize } from '../../../utils/canvas'
@@ -12,6 +13,18 @@ import {
 
 const obj = {}
 obj.displayName = 'Frame'
+
+obj.propTypes = {
+  size: PropTypes.number,
+  data: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+    id: PropTypes.string
+  }),
+  onSelect: PropTypes.func,
+  index: PropTypes.number,
+  version: PropTypes.number
+}
 
 obj.getInitialState = function () {
   return {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { register } from 'react-dynamic-layout'
@@ -9,6 +10,17 @@ obj.displayName = 'ContentCanvas'
 
 obj.getInitialState = function () {
   return {}
+}
+
+obj.propTypes = {
+  sprites: PropTypes.object,
+  frames: PropTypes.object,
+  layers: PropTypes.object,
+  tool: PropTypes.string,
+  style: PropTypes.object,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  sprite: PropTypes.string
 }
 
 obj.componentDidMount = function () {

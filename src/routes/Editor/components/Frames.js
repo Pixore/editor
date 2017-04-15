@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { cuid } from 'react-dynamic-layout/lib'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
@@ -19,8 +20,8 @@ const obj = {}
 obj.displayName = 'Frames'
 
 obj.propTypes = {
-  sprite: React.PropTypes.object.isRequired,
-  frames: React.PropTypes.object.isRequired
+  sprite: PropTypes.object.isRequired,
+  frames: PropTypes.object.isRequired
 }
 
 obj.getDefaultProps = function () {

@@ -1,5 +1,6 @@
 /* eslint id-length: 0 */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { register } from 'react-dynamic-layout'
 
@@ -21,6 +22,16 @@ const noop = function () {}
 const obj = {}
 
 obj.displayName = 'ColorPicker'
+
+obj.propTypes = {
+  color: PropTypes.string,
+  action: PropTypes.string,
+  palette: PropTypes.string,
+  position: PropTypes.any,
+  sprite: PropTypes.string,
+  modalColorPickerId: PropTypes.string,
+  rdCloseFloat: PropTypes.func
+}
 
 obj.getInitialState = function () {
   var size = 280

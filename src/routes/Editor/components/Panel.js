@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const $window = $(window)
 const obj = {}
@@ -6,7 +7,7 @@ const obj = {}
 obj.displayName = 'Panel'
 
 obj.propTypes = {
-  name: React.PropTypes.string.isRequired
+  name: PropTypes.string.isRequired
 }
 obj.getDefaultProps = function () {
   return {

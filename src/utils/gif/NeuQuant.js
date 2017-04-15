@@ -442,4 +442,4 @@ function NeuQuant(pixels, samplefac) {
   this.lookupRGB = inxsearch
 }
 
-module.exports = NeuQuant
+export default NeuQuant

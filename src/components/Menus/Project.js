@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { noTransparent, getBlob } from '../../utils/canvas'
@@ -120,7 +121,7 @@ const Proyect = props => (
 )
 
 Proyect.propTypes = {
-  openNewSpriteModal: React.PropTypes.func.isRequired
+  openNewSpriteModal: PropTypes.func.isRequired
 }
 
 function mapStateToProps (state) {

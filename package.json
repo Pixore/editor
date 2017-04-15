@@ -67,7 +67,7 @@
       [
         "es2015",
         {
-          "modules": "umd"
+          "modules": false
         }
       ],
       "react"
@@ -98,6 +98,7 @@
     "lodash.pick": "^4.4.0",
     "morgan": "^1.8.1",
     "normalize.css": "^5.0.0",
+    "prop-types": "^15.5.8",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-dynamic-layout": "2.3.1",
@@ -149,7 +150,8 @@
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.4.0",
-    "webpack": "^2.2.1",
+    "uglifyjs-webpack-plugin": "^0.4.3",
+    "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.1",
     "worker-loader": "^0.8.0"
   }

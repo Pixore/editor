@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getPreviewSize } from '../../../utils/canvas'
 import { getContext } from '../../../constants'
@@ -13,10 +14,10 @@ const obj = {}
 obj.displayName = 'Layer'
 
 obj.propTypes = {
-  onSelect: React.PropTypes.func.isRequired,
-  size: React.PropTypes.number.isRequired,
-  data: React.PropTypes.object.isRequired,
-  index: React.PropTypes.number.isRequired
+  onSelect: PropTypes.func.isRequired,
+  size: PropTypes.number.isRequired,
+  data: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 }
 
 obj.getInitialState = function () {

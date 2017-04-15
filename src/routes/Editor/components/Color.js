@@ -1,8 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const obj = {}
 
 obj.displayName = 'Color'
+
+obj.propTypes = {
+  onClick: PropTypes.func,
+  color: PropTypes.string,
+  size: PropTypes.any,
+  className: PropTypes.string
+}
 
 obj.getDefaultProps = function () {
   return {

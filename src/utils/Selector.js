@@ -116,4 +116,4 @@ Selector.prototype.append = function (child) {
   }
   return this
 }
-module.exports = Selector
+export default Selector

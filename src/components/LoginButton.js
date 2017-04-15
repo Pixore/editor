@@ -1,5 +1,6 @@
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { store } from '../store'
 import http from '../utils/http'
@@ -15,6 +16,12 @@ obj.getDefaultProps = function () {
   return {
     onLogin: () => {}
   }
+}
+
+obj.propTypes = {
+  onLogin: PropTypes.func,
+  twitter: PropTypes.bool,
+  className: PropTypes.string
 }
 
 obj.onClick = function (evt) {

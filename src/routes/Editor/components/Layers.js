@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { cuid } from 'react-dynamic-layout/lib'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
@@ -13,6 +14,13 @@ import {
 
 const obj = {}
 obj.displayName = 'Layers'
+
+obj.propType = {
+  sprite: PropTypes.object,
+  frame: PropTypes.object,
+  className: PropTypes.string,
+  style: PropTypes.object
+}
 
 obj.onClickAddLayer = function () {
   for (var j = 0; j < this.props.sprite.frames.length; j++) {

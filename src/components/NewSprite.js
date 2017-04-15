@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { cuid } from 'react-dynamic-layout/lib'
 
@@ -9,13 +10,28 @@ import {
   selectSpriteFrame,
   setCurrentSprite,
   openSprite,
-  addFrame, addLayerFrame,
+  addFrame,
+  addLayerFrame,
   addLayer
 } from '../ducks'
 
 const obj = {}
 
 obj.displayName = 'NewSprite'
+
+obj.propTypes = {
+  modalNewSpriteId: PropTypes.string,
+  rdCloseFloat: PropTypes.func,
+  addSprite: PropTypes.func,
+  addFrameSprite: PropTypes.func,
+  selectSpriteLayer: PropTypes.func,
+  selectSpriteFrame: PropTypes.func,
+  setCurrentSprite: PropTypes.func,
+  openSprite: PropTypes.func,
+  addFrame: PropTypes.func,
+  addLayerFrame: PropTypes.func,
+  addLayer: PropTypes.func
+}
 
 obj.onSubmit = function (evt) {
   evt.preventDefault()

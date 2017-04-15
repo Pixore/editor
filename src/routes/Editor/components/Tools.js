@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { register } from 'react-dynamic-layout'
 import { Tooltipy } from '../../../components/Tooltipy'
@@ -10,6 +11,14 @@ import {
 const obj = {}
 
 obj.displayName = 'Tools'
+
+obj.propTypes = {
+  tools: PropTypes.array,
+  tool: PropTypes.string,
+  secondaryColor: PropTypes.string,
+  primaryColor: PropTypes.string,
+  sprite: PropTypes.string
+}
 
 obj.componentDidMount = function () {
   if (!this.props.tool) {

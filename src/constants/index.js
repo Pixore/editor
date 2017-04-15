@@ -16,12 +16,12 @@ context.fillRect(32, 0, 32, 32)
 
 export const transparent = context.canvas
 export const transparentB64 = context.canvas.toDataURL()
-export const transparentImage = 'url(\'' + exports.transparentB64 + '\')'
+export const transparentImage = 'url(\'' + transparentB64 + '\')'
 
 make([
   'style',
   {parent: document.head},
-  '.transparent-bkg{background-image:' + exports.transparentImage + '}'
+  '.transparent-bkg{background-image:' + transparentImage + '}'
 ])
 
 export const TRANSPARENT_COLOR = 'rgba(0, 0, 0, 0)'

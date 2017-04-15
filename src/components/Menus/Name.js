@@ -1,8 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Tooltipy } from '../Tooltipy'
 const obj = {}
 
 obj.displayName = 'Name'
+
+obj.propTypes = {
+  name: PropTypes.string,
+  onSubmit: PropTypes.func
+}
 
 obj.onSubmit = function (evt) {
   evt.preventDefault()

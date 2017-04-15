@@ -1,5 +1,6 @@
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
 // import { imageSmoothingDisabled } from '../../../utils/canvas'
 
@@ -7,7 +8,7 @@ const obj = {}
 obj.displayName = 'ContextCanvas'
 
 obj.propTypes = {
-  Component: React.PropTypes.element.isRequired
+  Component: PropTypes.element.isRequired
 }
 
 obj.saveRef = function (element) {

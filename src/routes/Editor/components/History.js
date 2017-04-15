@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   redo,
@@ -9,6 +10,12 @@ import Panel from './Panel'
 const obj = {}
 
 obj.displayName = 'History'
+
+obj.propTypes = {
+  visible: PropTypes.bool,
+  redo: PropTypes.array,
+  undo: PropTypes.array
+}
 
 obj.render = function () {
   return <Panel name='History' visible={this.props.visible}>

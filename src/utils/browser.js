@@ -16,4 +16,4 @@ browser[browser.name + parseInt(browser.version, 10)] = true
 
 browser.platform[browser.platform.name] = true
 
-module.exports = browser
+export default browser

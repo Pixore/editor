@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
@@ -18,15 +19,15 @@ const obj = Object.assign({}, events)
 obj.displayName = 'Canvas'
 
 obj.propTypes = {
-  height: React.PropTypes.number.isRequired,
-  width: React.PropTypes.number.isRequired,
-  sprite: React.PropTypes.object.isRequired,
-  frame: React.PropTypes.object.isRequired,
-  layer: React.PropTypes.object.isRequired,
-  layers: React.PropTypes.object.isRequired,
-  primaryColor: React.PropTypes.string.isRequired,
-  secondaryColor: React.PropTypes.string.isRequired,
-  tool: React.PropTypes.string.isRequired
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  sprite: PropTypes.object.isRequired,
+  frame: PropTypes.object.isRequired,
+  layer: PropTypes.object.isRequired,
+  layers: PropTypes.object.isRequired,
+  primaryColor: PropTypes.string.isRequired,
+  secondaryColor: PropTypes.string.isRequired,
+  tool: PropTypes.string.isRequired
 }
 
 var out

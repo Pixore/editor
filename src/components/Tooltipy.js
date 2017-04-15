@@ -1,9 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 let setStatusTooltip
 
 const obj = {}
+
 obj.displayName = 'ToolTipy'
+
+obj.propTypes = {
+  text: PropTypes.string,
+  mode: PropTypes.any
+}
 
 obj.componentDidMount = function () {
   this.refs.el.addEventListener('mouseleave', this.onMouseLeave)

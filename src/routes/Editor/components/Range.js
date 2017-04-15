@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const obj = {}
 const $window = $(window)
@@ -6,9 +7,9 @@ const $window = $(window)
 obj.displayName = 'Range'
 
 obj.propTypes = {
-  min: React.PropTypes.number.isRequired,
-  max: React.PropTypes.number.isRequired,
-  value: React.PropTypes.number.isRequired
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired
 }
 
 obj.getDefaultProps = function () {

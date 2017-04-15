@@ -1,5 +1,6 @@
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { imageSmoothingDisabled, clean } from '../../../utils/canvas'
@@ -8,9 +9,9 @@ const obj = {}
 obj.displayName = 'Context'
 
 obj.propTypes = {
-  width: React.PropTypes.number.isRequired,
-  height: React.PropTypes.number.isRequired,
-  image: React.PropTypes.object.isRequired
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  image: PropTypes.object.isRequired
 }
 
 obj.getInitialState = function () {

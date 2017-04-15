@@ -45,4 +45,4 @@ SimpleQuant.prototype.lookupRGB = function (r, g, b) {
   return this.paletteIndex[getPaletteKey(r, g, b)]
 }
 
-module.exports = SimpleQuant
+export default SimpleQuant

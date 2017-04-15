@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { register } from 'react-dynamic-layout'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
@@ -12,6 +13,14 @@ import {
 import http from '../../../utils/http'
 
 const obj = {}
+
+obj.propTypes = {
+  className: PropTypes.string,
+  sprites: PropTypes.object,
+  editorId: PropTypes.string,
+  sprite: PropTypes.string,
+  filter: PropTypes.array
+}
 
 obj.displayName = 'Sprites'
 

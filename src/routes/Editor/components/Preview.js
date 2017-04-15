@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { register } from 'react-dynamic-layout'
 
@@ -9,6 +10,14 @@ import Range from './Range'
 const obj = {}
 
 obj.displayName = 'Preview'
+
+obj.propTypes = {
+  fps: PropTypes.number,
+  sprite: PropTypes.object,
+  frames: PropTypes.object,
+  className: PropTypes.string,
+  style: PropTypes.object
+}
 
 obj.getInitialState = function () {
   return {
