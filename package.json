@@ -5,12 +5,14 @@
   "main": "index.js",
   "homepage": "http://pixelzstudio.com",
   "scripts": {
+    "build": "rimraf build && env-cmd ./.env.prod webpack --config ./config/webpack.config.js ",
+    "prebuild": "yarn run test",
     "test:single": "karma start --single-run",
     "test:watch": "karma start --auto-watch",
-    "test:main": "npm run lint && npm run test:single",
-    "test": "env-cmd ./.env.test npm run test:main",
+    "test:main": "yarn run lint && yarn run test:single",
+    "test": "env-cmd ./.env.test yarn run test:main",
     "server": "node ./scripts/start.js",
-    "start": "env-cmd ./.env npm run server",
+    "start": "env-cmd ./.env yarn run server",
     "lint": "eslint ./src"
   },
   "eslintConfig": {

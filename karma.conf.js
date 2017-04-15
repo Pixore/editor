@@ -1,4 +1,4 @@
-const webpackConfig = require('./webpack.config.js')
+const webpackConfig = require('./config/webpack.config.js')
 
 webpackConfig.devtool = 'cheap-module-source-map'
 webpackConfig.watch = true
@@ -8,11 +8,11 @@ module.exports = config => {
     singleRun: true,
     frameworks: ['mocha'],
     files: [
-      './src/client/tests.webpack.js',
-      {pattern: './src/client/**/*.spec.js', included: false, served: false, watched: true}
+      './src/tests.webpack.js',
+      {pattern: './src/**/*.spec.js', included: false, served: false, watched: true}
     ],
     preprocessors: {
-      './src/client/tests.webpack.js': ['webpack']
+      './src/tests.webpack.js': ['webpack']
     },
     plugin: [
       'karma-chrome-launcher',
