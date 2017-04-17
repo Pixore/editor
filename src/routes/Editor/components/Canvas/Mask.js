@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 const obj = {}
 obj.displayName = 'Mask'
 
@@ -7,10 +8,10 @@ obj.getInitialState = function () {
 }
 
 obj.propTypes = {
-  height: React.PropTypes.number.isRequired,
-  width: React.PropTypes.number.isRequired,
-  artboard: React.PropTypes.object.isRequired,
-  layer: React.PropTypes.object.isRequired
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  artboard: PropTypes.object.isRequired,
+  layer: PropTypes.object.isRequired
 }
 
 obj.componentDidMount = function () {

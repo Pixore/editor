@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import {
@@ -9,6 +10,16 @@ const obj = {}
 let canvas
 let context
 obj.displayName = 'Preview'
+
+obj.propTypes = {
+  setContext: PropTypes.func,
+  primaryColor: PropTypes.string,
+  size: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number
+  }),
+  style: PropTypes.object
+}
 
 obj.componentDidMount = function () {
   canvas = ReactDOM.findDOMNode(this)

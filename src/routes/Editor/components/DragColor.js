@@ -1,19 +1,20 @@
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import { LEFT_CLICK } from '../../../constants/index'
 const obj = {}
 
 obj.displayName = 'DragColor'
 
 obj.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  size: React.PropTypes.number.isRequired,
-  onSelectColor: React.PropTypes.func.isRequired,
-  position: React.PropTypes.shape({
-    x: React.PropTypes.number,
-    y: React.PropTypes.number
+  index: PropTypes.number.isRequired,
+  size: PropTypes.number.isRequired,
+  onSelectColor: PropTypes.func.isRequired,
+  position: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number
   }).isRequired,
-  color: React.PropTypes.string.isRequired
+  color: PropTypes.string.isRequired
 }
 
 obj.onMouseDown = function () {

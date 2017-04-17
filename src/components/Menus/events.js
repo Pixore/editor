@@ -1,5 +1,4 @@
 import http from '../../utils/http'
-// import React from 'react'
 import Gif from '../../utils/gif/gif'
 import { noTransparent } from '../../utils/canvas'
 import { getContext } from '../../constants'

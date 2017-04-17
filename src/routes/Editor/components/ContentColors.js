@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Color from './DragColor'
 
@@ -7,7 +8,7 @@ const obj = {}
 obj.displayName = 'ContentColors'
 
 obj.propTypes = {
-  colors: React.PropTypes.array
+  colors: PropTypes.array
 }
 
 obj.getDefaultProps = function () {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { imageSmoothingDisabled, clean } from '../../../../utils/canvas'
 import { getContext } from '../../../../constants'
 const obj = {}
@@ -6,11 +7,11 @@ const obj = {}
 obj.displayName = 'Layer'
 
 obj.propTypes = {
-  height: React.PropTypes.number.isRequired,
-  width: React.PropTypes.number.isRequired,
-  artboard: React.PropTypes.object.isRequired,
-  layer: React.PropTypes.object.isRequired /* ,
-  zIndex: React.PropTypes.number.isRequired */
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  artboard: PropTypes.object.isRequired,
+  layer: PropTypes.object.isRequired /* ,
+  zIndex: PropTypes.number.isRequired */
 }
 
 obj.componentDidUpdate = function () {

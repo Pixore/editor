@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const obj = {}
 
@@ -29,8 +30,8 @@ obj.render = function () {
 }
 
 obj.propTypes = {
-  loader: React.PropTypes.func.isRequired,
-  renderPlaceholder: React.PropTypes.func
+  loader: PropTypes.func.isRequired,
+  renderPlaceholder: PropTypes.func
 }
 
 const AsyncComponent = React.createClass(obj)

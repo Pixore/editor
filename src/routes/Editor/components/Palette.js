@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { register } from 'react-dynamic-layout'
 import { connect } from 'react-redux'
 
@@ -16,6 +17,14 @@ import {
 const obj = {}
 
 obj.displayName = 'Palette'
+
+obj.propTypes = {
+  palettes: PropTypes.array,
+  sprite: PropTypes.object,
+  palette: PropTypes.array,
+  className: PropTypes.string,
+  style: PropTypes.object
+}
 
 obj.getInitialState = function () {
   return {

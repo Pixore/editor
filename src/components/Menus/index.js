@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { register } from 'react-dynamic-layout'
 
@@ -19,8 +20,8 @@ const obj = Object.assign({}, events)
 obj.displayName = 'Menus'
 
 obj.propTypes = {
-  sprite: React.PropTypes.object,
-  spriteId: React.PropTypes.string
+  sprite: PropTypes.object,
+  spriteId: PropTypes.string
 }
 
 obj.getInitialState = function () {

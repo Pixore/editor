@@ -1,7 +1,7 @@
 import { isElement } from './dom.js'
 
 // NOTE: code taken from http://stackoverflow.com/a/2947012/4394520 with a littles chages
-module.exports = function make (desc) {
+export default function make (desc) {
   if (!Array.isArray(desc)) {
     return make.call(this, Array.prototype.slice.call(arguments))
   }

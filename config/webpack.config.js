@@ -1,14 +1,15 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
-const { isProd, MAIN_TEMPLATE, APP_PATH, PUBLIC_PATH, PIXORE_PATH } = require('./environment')
+const { isProd, MAIN_TEMPLATE, APP_PATH, BUILD_PATH, PIXORE_PATH } = require('./environment')
 
 const plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    'process.env.PIXORE_PATH': JSON.stringify(process.env.PIXORE_PATH)
+    'process.env.PIXORE_PATH': JSON.stringify(PIXORE_PATH)
   })
 ]
 let devtool
@@ -69,9 +70,9 @@ const resolve = {
 }
 const output = {
   pathinfo: true,
-  publicPath: path.join('/', process.env.PIXORE_PATH),
-  path: PUBLIC_PATH,
-  filename: 'bundle.js'
+  publicPath: path.join('/', PIXORE_PATH),
+  path: BUILD_PATH,
+  filename: isProd ? '[name].[chunkhash].js' : 'build.js'
 }
 
 if (isProd) {
@@ -79,8 +80,16 @@ if (isProd) {
     index: APP_PATH
   }
   plugins.push(
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function (module) {
+        return module.context && module.context.indexOf('node_modules') !== -1
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest'
+    }),
+    new UglifyJSPlugin(),
     new HtmlWebpackPlugin({
       title: 'Pixore',
       filename: 'index.html',
@@ -96,7 +105,7 @@ if (isProd) {
     require.resolve('./polyfills'),
     APP_PATH
   ]
-  devtool = 'cheap-source-map'
+  devtool = 'source-map'
   plugins.push(
     new HtmlWebpackPlugin({
       title: 'Pixore',

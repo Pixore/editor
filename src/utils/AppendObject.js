@@ -29,4 +29,4 @@ AppendObject.prototype.removeClass = function (cls) {
   return this
 }
 AppendObject.prototype.$type = 'div'
-module.exports = AppendObject
+export default AppendObject

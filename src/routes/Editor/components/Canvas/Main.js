@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { getContext } from '../../../../constants'
 import { imageSmoothingDisabled, clean } from '../../../../utils/canvas'
@@ -7,6 +8,17 @@ const obj = {}
 obj.displayName = 'Main'
 
 obj.getInitialState = () => ({})
+
+obj.propTypes = {
+  layer: PropTypes.object,
+  artboard: PropTypes.object,
+  setContext: PropTypes.func,
+  style: PropTypes.object,
+  size: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number
+  })
+}
 
 obj.componentDidMount = function () {
   let context = this.refs.canvas.getContext('2d')

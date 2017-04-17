@@ -234,4 +234,4 @@ GIF.prototype.getTask = function (frame) {
   return task
 }
 
-module.exports = GIF
+export default GIF

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { imageSmoothingDisabled, clean } from '../../../utils/canvas'
 import { getContext } from '../../../constants'
@@ -7,12 +8,12 @@ const obj = {}
 obj.displayName = 'Sprite'
 
 obj.propTypes = {
-  style: React.PropTypes.object.isRequired,
-  width: React.PropTypes.number.isRequired,
-  height: React.PropTypes.number.isRequired,
-  frames: React.PropTypes.object.isRequired,
-  interval: React.PropTypes.number.isRequired,
-  filter: React.PropTypes.array.isRequired
+  style: PropTypes.object.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  frames: PropTypes.object.isRequired,
+  interval: PropTypes.number.isRequired,
+  filter: PropTypes.array.isRequired
 }
 
 obj.render = function () {

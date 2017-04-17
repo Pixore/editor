@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 const obj = {}
 obj.displayName = 'Menu'
@@ -13,30 +14,37 @@ obj.getDefaultProps = function () {
   }
 }
 
-// obj.propTypes = {
-//   children: function (props, propName, componentName) {
-//     var prop = props[propName]
-//     if (Array.isArray(prop)) {
-//       for (var i = 0; i < prop.length; i++) {
-//         var element = prop[i]
-//         if (typeof element.type === 'function' && element.type.displayName !== 'Menu') {
-//           return getError(element.type)
-//         } else if (typeof element.type === 'string' && element.type !== 'li') {
-//           return getError(element.type)
-//         }
-//       }
-//     } else {
-//       if (typeof prop.type === 'function' && prop.type.displayName !== 'Menu') {
-//         return getError(prop.type)
-//       } else if (typeof prop.type === 'string' && prop.type !== 'li') {
-//         return getError(prop.type)
-//       }
-//     }
-//     function getError () {
-//       return new Error(`${componentName} should have a single child of the following types: 'li, Menu'`)
-//     }
-//   }
-// }
+obj.propTypes = {
+  child: PropTypes.bool,
+  position: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number
+  }),
+  inline: PropTypes.bool,
+  active: PropTypes.bool
+  // children: function (props, propName, componentName) {
+  //   var prop = props[propName]
+  //   if (Array.isArray(prop)) {
+  //     for (var i = 0; i < prop.length; i++) {
+  //       var element = prop[i]
+  //       if (typeof element.type === 'function' && element.type.displayName !== 'Menu') {
+  //         return getError(element.type)
+  //       } else if (typeof element.type === 'string' && element.type !== 'li') {
+  //         return getError(element.type)
+  //       }
+  //     }
+  //   } else {
+  //     if (typeof prop.type === 'function' && prop.type.displayName !== 'Menu') {
+  //       return getError(prop.type)
+  //     } else if (typeof prop.type === 'string' && prop.type !== 'li') {
+  //       return getError(prop.type)
+  //     }
+  //   }
+  //   function getError () {
+  //     return new Error(`${componentName} should have a single child of the following types: 'li, Menu'`)
+  //   }
+  // }
+}
 obj.render = function () {
   if (this.props.child) {
     return <li>

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { ModalManager } from 'react-dynamic-modal'
@@ -6,6 +7,10 @@ import Login from '../modals/Login'
 const obj = {}
 
 obj.displayName = 'Narbar'
+
+obj.propTypes = {
+  user: PropTypes.object
+}
 
 obj.onLogin = function (evt) {
   evt.preventDefault()
