@@ -8,7 +8,7 @@ obj.onMouseDown = function (evt) {
   if (evt.target.nodeName !== 'CANVAS') return
   let newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
   if (!validCord(this.layer, newPixel)) return
-  newPixel.color = getColorPixel(this.layer, newPixel, this.context)
+  newPixel.color = getColorPixel(this.layer.width, newPixel, this.context)
   if (evt.which === this.RIGHT_CLICK) {
     this.setSecudaryColor(newPixel.color)
   } else {

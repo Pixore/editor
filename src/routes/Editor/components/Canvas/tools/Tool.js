@@ -1,5 +1,6 @@
 import { store } from '../../../../../store'
-import { cloneContext, clean } from '../../../../../utils/canvas'
+import { cloneContext, clean, isSameColor } from '../../../../../utils/canvas'
+import { getRGBAComponents } from '../../../../../utils/color'
 import {
   setSpriteSecondaryColor,
   setSpritePrimaryColor,
@@ -58,6 +59,56 @@ common.newVersion = function (layer) {
   store.dispatch(newLayerVersion(layer.id))
   store.dispatch(newFrameVersion(layer.frame))
   store.dispatch(newSpriteVersion(layer.sprite))
+}
+
+common.fill = function (initCord, newColor, oldColor, fn) {
+  let stack = [initCord]
+  let current
+  let aside
+  let numPixels = 4 * (this.layer.width * this.layer.height)
+  let count = 0
+  let dy = [-1, 0, 1, 0]
+  let dx = [0, 1, 0, -1]
+  let newComponents = getRGBAComponents(newColor)
+  let oldComponents = getRGBAComponents(oldColor)
+
+  if (!isSameColor(
+        this.savedData,
+        this.layer.width,
+        this.layer.height,
+        initCord.x,
+        initCord.y,
+        oldComponents,
+        newComponents
+      )
+  ) {
+    return
+  }
+
+  while (stack.length) {
+    current = stack.pop()
+
+    fn({x: current.x, y: current.y}, newColor)
+    for (let i = 0; i < 4; i++) {
+      aside = {x: current.x + dx[i], y: current.y + dy[i]}
+      if (isSameColor(
+            this.savedData,
+            this.layer.width,
+            this.layer.height,
+            aside.x,
+            aside.y,
+            oldComponents,
+            newComponents
+          )
+        ) {
+        stack.push(aside)
+      }
+    }
+    if (count > numPixels) {
+      break
+    }
+    count++
+  }
 }
 
 common.lineBetween = function (x1, y1, x2, y2, fn) {

@@ -116,8 +116,8 @@ export function noTransparent (context, scale, transparent) {
   return context
 }
 
-export function getColorPixel (layer, cord, context) {
-  var index = (cord.x + cord.y * layer.width) * 4
+export function getColorPixel (width, cord, context) {
+  var index = (cord.x + cord.y * width) * 4
   var imageData = getImageData(context)
   if (index >= 0 && index <= imageData.length) {
     return `rgba(${imageData[index]}, ${imageData[index + 1]}, ${imageData[index + 2]}, ${imageData[index + 3] / 255})`
@@ -130,4 +130,21 @@ export const getBlob = canvas =>
 export const clean = canvas => {
   canvas.width = canvas.width
   return canvas
+}
+
+export const isSameColor = (data, width, height, x, y, components1, components2) => {
+  var index = (x + y * width) * 4
+  if (x >= 0 && x < width && y >= 0 && y < height) {
+    if (data[index] === components1[0] &&
+      data[index + 1] === components1[1] &&
+      data[index + 2] === components1[2] &&
+      data[index + 3] / 255 === components1[3]) {
+      data[index] = components2[0]
+      data[index + 1] = components2[1]
+      data[index + 2] = components2[2]
+      data[index + 3] = components2[3] * 255
+      return true
+    }
+  }
+  return false
 }
