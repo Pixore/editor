@@ -5310,9 +5310,9 @@ react-dom@^15.4.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-dynamic-layout@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/react-dynamic-layout/-/react-dynamic-layout-2.3.2.tgz#a93f32342176a5165fc1f9931b4ddc42176a372b"
+react-dynamic-layout@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/react-dynamic-layout/-/react-dynamic-layout-2.3.3.tgz#3478152e4c370f1cfa283a7a09685f8f8131865b"
   dependencies:
     classnames "^2.2.5"
 
