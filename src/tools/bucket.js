@@ -29,16 +29,6 @@ obj.onMouseDown = function (evt) {
   }
 }
 
-obj.cleanAt = function (pixel) {
-  this.context.clearRect(pixel.x, pixel.y, 1, 1)
-}
-
-obj.fillAt = function (pixel, color) {
-  this.context.fillStyle = color
-  this.context.clearRect(pixel.x, pixel.y, 1, 1)
-  this.context.fillRect(pixel.x, pixel.y, 1, 1)
-}
-
 obj.onMouseUp = function (evt) {
   $window.off('mouseup.upCanvas')
   this.savedData = getImageData(this.prevStatus)

@@ -15,6 +15,11 @@ import { RIGHT_CLICK, getContext } from '../constants'
 const { abs } = Math
 const common = {}
 
+const cordLayerToPaint = (cord, artboard) => ({
+  x: (cord.x * artboard.scale) + artboard.x,
+  y: (cord.y * artboard.scale) + artboard.y
+})
+
 common.RIGHT_CLICK = RIGHT_CLICK
 
 common.getColor = function (which) {
@@ -36,6 +41,24 @@ common.setPrimaryColor = function (color) {
   )
 }
 
+common.fillPrevAt = function (pixel, color) {
+  const newPixel = cordLayerToPaint(pixel, this.artboard)
+  this.preview.fillStyle = color
+
+  this.preview.clearRect(newPixel.x, newPixel.y, this.artboard.scale, this.artboard.scale)
+  this.preview.fillRect(newPixel.x, newPixel.y, this.artboard.scale, this.artboard.scale)
+}
+
+common.cleanAt = function (pixel) {
+  this.context.clearRect(pixel.x, pixel.y, 1, 1)
+}
+
+common.fillAt = function (pixel, color) {
+  this.context.fillStyle = color
+  this.context.clearRect(pixel.x, pixel.y, 1, 1)
+  this.context.fillRect(pixel.x, pixel.y, 1, 1)
+}
+
 common.setSecondaryColor = function (color) {
   store.dispatch(
     setSpriteSecondaryColor(
@@ -46,6 +69,7 @@ common.setSecondaryColor = function (color) {
 }
 
 common.newVersion = function (layer) {
+  layer = layer || this.layer
   const state = store.getState()
   const frame = state.frames[layer.frame]
   const context = getContext(frame.id)
@@ -59,6 +83,34 @@ common.newVersion = function (layer) {
   store.dispatch(newLayerVersion(layer.id))
   store.dispatch(newFrameVersion(layer.frame))
   store.dispatch(newSpriteVersion(layer.sprite))
+}
+
+common.getRectangle = function (x1, y1, x2, y2, color, fn) {
+  let stepX = x1 < x2 ? 1 : -1
+  let stepY = y1 < y2 ? 1 : -1
+  let diffX = Math.abs(x1 - x2)
+  let diffY = Math.abs(y1 - y2)
+  let tempX1 = x1
+  let tempY1 = y1
+
+  clean(this.preview.canvas)
+
+  while (diffX > 0) {
+    diffX--
+
+    this[fn]({x: tempX1, y: y1}, color)
+    this[fn]({x: tempX1, y: y2}, color)
+    tempX1 += stepX
+  }
+  this[fn]({x: tempX1, y: y1}, color)
+  this[fn]({x: tempX1, y: y2}, color)
+
+  while (diffY > 0) {
+    diffY--
+    tempY1 += stepY
+    this[fn]({x: x1, y: tempY1}, color)
+    this[fn]({x: x2, y: tempY1}, color)
+  }
 }
 
 common.fill = function (initCord, newColor, oldColor, fn) {
