@@ -1,5 +1,5 @@
 import Tool from './Tool'
-import { calculatePosition, validCord } from '../../../../../utils/canvas'
+import { calculatePosition, validCord } from '../utils/canvas'
 const $window = $(window)
 
 const { abs } = Math

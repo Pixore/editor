@@ -1,5 +1,5 @@
 import Tool from './Tool'
-import { calculatePosition, validCord, getColorPixel } from '../../../../../utils/canvas'
+import { calculatePosition, validCord, getColorPixel } from '../utils/canvas'
 
 const obj = {}
 // let lastPixel

@@ -5,7 +5,7 @@ import {
   clean as cleanCanvas
 } from '../../../../utils/canvas'
 import { MIDDLE_CLICK, RIGHT_CLICK, LEFT_CLICK } from '../../../../constants'
-import * as tools from './tools'
+import * as tools from '../../../../tools'
 
 const { ceil, floor } = Math
 let lastDragX, lastDragY

@@ -1,6 +1,6 @@
-import { store } from '../../../../../store'
-import { cloneContext, clean, isSameColor } from '../../../../../utils/canvas'
-import { getRGBAComponents } from '../../../../../utils/color'
+import { store } from '../store'
+import { cloneContext, clean, isSameColor } from '../utils/canvas'
+import { getRGBAComponents } from '../utils/color'
 import {
   setSpriteSecondaryColor,
   setSpritePrimaryColor,
@@ -8,9 +8,9 @@ import {
   addUndoPaint,
   newLayerVersion,
   newFrameVersion
-} from '../../../../../ducks'
+} from '../ducks'
 
-import { RIGHT_CLICK, getContext } from '../../../../../constants'
+import { RIGHT_CLICK, getContext } from '../constants'
 
 const { abs } = Math
 const common = {}

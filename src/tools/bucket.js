@@ -1,6 +1,6 @@
 import Tool from './Tool'
-import { TRANSPARENT_COLOR } from '../../../../../constants'
-import { calculatePosition, validCord, getColorPixel, getImageData } from '../../../../../utils/canvas'
+import { TRANSPARENT_COLOR } from '../constants'
+import { calculatePosition, validCord, getColorPixel, getImageData } from '../utils/canvas'
 
 const obj = {}
 let color, oldColor
