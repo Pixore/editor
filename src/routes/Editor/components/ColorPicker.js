@@ -273,6 +273,7 @@ obj.onClickOK = function () {
       this.props[action](this.state.color)
       break
   }
+  this.onClickCancel()
 }
 obj.onClickCancel = function () {
   this.props.rdCloseFloat(this.props.modalColorPickerId)

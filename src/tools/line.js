@@ -1,8 +1,7 @@
 import Tool from './Tool'
-import { isTransparent } from '../../../../../utils/color'
-import { calculatePosition, validCord } from '../../../../../utils/canvas'
+import { calculatePosition, validCord } from '../utils/canvas'
+import { isTransparent } from '../utils/color'
 
-const { abs } = Math
 const obj = {}
 let lastPixel, color, at
 
@@ -11,49 +10,41 @@ obj.onMouseDown = function (evt) {
   lastPixel = this.initCord
   color = this.getColor(evt.which)
   if (isTransparent(color)) {
-    at = this.clean
+    at = this.previewClean
   } else {
-    at = this.paint
+    at = this.previewPaint
   }
-  $window.offOn('mouseup.upCanvas', this.onMouseUp, false)
-  $window.offOn('mouseout.leaveCanvas', this.onMouseLeave, false)
-  $window.offOn('mousemove.moveCanvas', this.onMouseMove, false)
+  $window.off('mouseup.upCanvas').on('mouseup.upCanvas', this.onMouseUp, false)
+  $window.off('mousemove.moveCanvas').on('mousemove.moveCanvas', this.onMouseMove, false)
 }
-obj.onMouseLeave = function (evt) {
-  let el = evt.toElement || evt.relatedTarget
-  if (el !== document.children[0]) {
-    return
-  }
-  lastPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
-}
-obj.clean = function (x, y) {
+obj.previewClean = function (x, y) {
   this.preview.clearRect(
     (x * this.artboard.scale) + this.artboard.x,
     (y * this.artboard.scale) + this.artboard.y,
     this.artboard.scale, this.artboard.scale)
-  this.context.clearRect(x, y, 1, 1)
 }
-obj.paint = function (x, y) {
+obj.previewPaint = function (x, y) {
   this.preview.fillStyle = color
   this.preview.fillRect(
     (x * this.artboard.scale) + this.artboard.x,
     (y * this.artboard.scale) + this.artboard.y,
     this.artboard.scale, this.artboard.scale)
-  this.context.fillStyle = color
-  this.context.fillRect(x, y, 1, 1)
 }
 obj.onMouseMove = function (evt) {
   if (this.clicked) {
     let newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
     if (validCord(this.layer, newPixel) || validCord(this.layer, lastPixel)) {
-      if (abs(lastPixel.y - newPixel.y) > 1 || abs(lastPixel.x - newPixel.x) > 1) { // importantDiff
-        this.lineBetween(lastPixel.x, lastPixel.y, newPixel.x, newPixel.y, at)
-      } else {
-        at(newPixel.x, newPixel.y)
-      }
+      this.preview.canvas.width = this.preview.canvas.width
+      this.lineBetween(lastPixel.x, lastPixel.y, newPixel.x, newPixel.y, at)
     }
-    lastPixel = newPixel
   }
+}
+obj.clean = function (x, y) {
+  this.context.clearRect(x, y, 1, 1)
+}
+obj.paint = function (x, y) {
+  this.context.fillStyle = color
+  this.context.fillRect(x, y, 1, 1)
 }
 obj.onMouseUp = function (evt) {
   $window.off('mouseup.upCanvas')
@@ -61,8 +52,16 @@ obj.onMouseUp = function (evt) {
   $window.off('mousemove.moveCanvas')
   if (this.clicked) {
     this.clicked = false
+    if (isTransparent(color)) {
+      at = this.clean
+    } else {
+      at = this.paint
+    }
     let newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
-    at(newPixel.x, newPixel.y)
+    if (validCord(this.layer, newPixel) || validCord(this.layer, lastPixel)) {
+      this.preview.canvas.width = this.preview.canvas.width
+      this.lineBetween(lastPixel.x, lastPixel.y, newPixel.x, newPixel.y, at)
+    }
     lastPixel = undefined
     this.newVersion(this.layer)
     this.addUndo({
