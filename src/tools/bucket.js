@@ -44,6 +44,4 @@ obj.onMouseUp = function (evt) {
   this.savedData = getImageData(this.prevStatus)
 }
 
-const pencil = Tool.create('pencil', obj)
-
-export default pencil
+export default Tool.create('bucket', obj)
