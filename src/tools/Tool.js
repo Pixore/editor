@@ -201,12 +201,13 @@ common.onMouseDownInit = function (evt, initCord, layer, artboard, {main, previe
 
 export function create (name, custom) {
   let tool = Object.create(common)
-  let keys = Object.keys(custom)
-  for (var j = 0; j < keys.length; j++) {
-    if (typeof custom[[keys[j]]] === 'function') {
-      tool[keys[j]] = custom[[keys[j]]].bind(tool)
+  Object.keys(common).concat(
+    Object.keys(custom)
+  ).forEach(key => {
+    if (typeof tool[key] === 'function' || typeof custom[key] === 'function') {
+      tool[key] = (custom[key] || tool[key]).bind(tool)
     }
-  }
+  })
   tool.name = name
   return tool
 }
