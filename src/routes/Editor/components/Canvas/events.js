@@ -51,11 +51,11 @@ export const openContextMenu = function (evt) {
     }
   })
 }
-export const center = function (stats) {
-  stats = stats || this.state.stats
-  let { sprite } = this.props
+export const center = function (stats, props) {
+  stats = stats || this.state.statsprops
+  let { sprite, setSpriteArtboard } = props || this.props
   let size = getPreviewSize(stats.width, stats.height, sprite.width, sprite.height)
-  this.props.setSpriteArtboard(this.props.sprite.id, {
+  setSpriteArtboard(sprite.id, {
     scale: floor(size.scale),
     x: Number.parseInt(stats.left + size.marginLeft),
     y: floor(stats.top + size.marginTop)
