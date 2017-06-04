@@ -1,3 +1,5 @@
+import { getContext, addContext } from '../constants'
+
 const { floor } = Math
 
 export function walkBitmap (bitmap, fn) {
@@ -16,6 +18,17 @@ export function imageSmoothing (ctx, value) {
 
 export function imageSmoothingDisabled (ctx) {
   imageSmoothing(ctx, false)
+}
+
+export const canvasToContext = (name, self) => canvas => {
+  if (!canvas) return
+  const context = canvas.getContext('2d')
+  if (!self[name]) {
+    self[name] = context
+  }
+  if (!getContext(name)) {
+    addContext(name, context)
+  }
 }
 
 export function getPreviewSize (maxWidth, maxHeight, width, height) {

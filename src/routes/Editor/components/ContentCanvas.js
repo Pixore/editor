@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { register } from 'react-dynamic-layout'
-import Canvas from './index'
+import Canvas from '../../../canvas'
 const obj = {}
 
 obj.displayName = 'ContentCanvas'

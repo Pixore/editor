@@ -13,9 +13,11 @@ const $window = $(window)
 $window.on('keydown.general', evt => {
   window.CTRL_KEY = evt.ctrlKey
   window.ALT_KEY = evt.altKey
+  window.META_KEY = evt.metaKey
 }).on('keyup.general', evt => {
   window.CTRL_KEY = evt.ctrlKey
   window.ALT_KEY = evt.altKey
+  window.META_KEY = evt.metaKey
 })
 
 import React from 'react'
