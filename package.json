@@ -36,6 +36,7 @@
       "beforeEach": true
     },
     "rules": {
+      "no-return-assign": 0,
       "id-length": [
         "error",
         {

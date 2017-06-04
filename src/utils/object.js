@@ -31,3 +31,6 @@ export const bindObject = function (obj, self) {
     }
   }
 }
+
+export const setBinds = (context, funcs) =>
+  funcs.forEach(name => context[name] = context[name].bind(context))

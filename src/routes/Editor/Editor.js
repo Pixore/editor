@@ -13,7 +13,7 @@ import {
 import 'react-dynamic-layout/lib/style/base/index.styl'
 import 'react-dynamic-layout/lib/style/dark/index.styl'
 
-import ContentCanvas from './components/Canvas/ContentCanvas'
+import ContentCanvas from './components/ContentCanvas'
 import './components/Preview'
 import './components/Palette'
 
