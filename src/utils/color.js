@@ -71,7 +71,7 @@ const rand = function (max) {
 }
 
 export function getRGBAComponents (color) {
-  let components = color.substring(color.indexOf('(') + 1, color.lastIndexOf(')')).split(/,\s*/)
+  const components = color.substring(color.indexOf('(') + 1, color.lastIndexOf(')')).split(/,\s*/)
   for (let j = 0; j < components.length; j++) {
     components[j] = Number(components[j])
   }
@@ -107,7 +107,7 @@ export function rgbToHex (r, g, b) {
 export function unusedColor (usedColors) {
   for (let i = 0; i < uglyColors.length; i++) {
     if (!usedColors[uglyColors[i]]) {
-      let components = uglyColors[i].split('.')
+      const components = uglyColors[i].split('.')
       return {r: components[0], g: components[1], b: components[2]}
     }
   }

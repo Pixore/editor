@@ -26,9 +26,9 @@ obj.onMouseEnter = function () {
 }
 
 obj.render = function () {
-  let Component = this.props.children
-  let type = Component.type
-  let props = Component.props
+  const Component = this.props.children
+  const type = Component.type
+  const props = Component.props
   return React.createElement(type, Object.assign({ref: 'el'}, props))
 }
 

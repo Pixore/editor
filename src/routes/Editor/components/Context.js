@@ -24,7 +24,7 @@ obj.getInitialProps = function () {
 }
 
 obj.componentDidMount = function () {
-  let context = ReactDOM.findDOMNode(this).getContext('2d')
+  const context = ReactDOM.findDOMNode(this).getContext('2d')
   this.setState({
     context: context
   })
@@ -63,11 +63,11 @@ obj.componentDidUpdate = function () {
   this.initContext(this.props)
 }
 obj.render = function () {
-  return <canvas
+  return (<canvas
     className={this.props.className}
     style={this.props.style}
     height={this.props.height}
-    width={this.props.width} />
+    width={this.props.width} />)
 }
 
 const Context = React.createClass(obj)

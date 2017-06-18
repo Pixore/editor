@@ -6,15 +6,15 @@ export default function make (desc) {
     return make.call(this, Array.prototype.slice.call(arguments))
   }
 
-  let name = desc[0]
+  const name = desc[0]
   let parent = false
-  let attributes = desc[1]
+  const attributes = desc[1]
 
-  let el = typeof name === 'string' ? document.createElement(name) : name
+  const el = typeof name === 'string' ? document.createElement(name) : name
 
   let start = 1
   if (typeof attributes === 'object' && attributes !== null && !Array.isArray(attributes) && !isElement(attributes)) {
-    for (let attr in attributes) {
+    for (const attr in attributes) {
       if (attr === 'parent') {
         parent = true
       } else {

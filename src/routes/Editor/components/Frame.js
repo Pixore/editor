@@ -68,12 +68,14 @@ obj.onDrop = function (evt) {
   )
 }
 obj.render = function () {
-  let style = {}
+  const style = {}
   style.height = this.state.height
   style.width = this.state.width
   style.marginLeft = this.state.marginLeft
   style.marginTop = this.state.marginTop
-  return <div onDrop={this.onDrop} draggable='true' onDragOver={this.onDragOver} onDragStart={this.onDragStart} style={style} onClick={this.onClick} className='transparent-bkg'>
+  return (<div onDrop={this.onDrop} draggable='true' onDragOver={this.onDragOver}
+    onDragStart={this.onDragStart} style={style} onClick={this.onClick}
+    className='transparent-bkg'>
     <Context
       width={this.state.width}
       height={this.state.height}
@@ -83,7 +85,7 @@ obj.render = function () {
     <button className='btn btn-hidden'>h</button>
     <button className='btn btn-delete'>d</button>
     <span>{this.props.index + 1}</span>
-  </div>
+  </div>)
 }
 const Frame = React.createClass(obj)
 

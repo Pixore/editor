@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 
 import Color from './DragColor'
 
+import createDebug from 'debug'
+
+const debug = createDebug()
+
 const obj = {}
 
 obj.displayName = 'ContentColors'
@@ -18,8 +22,12 @@ obj.getDefaultProps = function () {
 }
 
 obj.onSelectColor = function (color, primary) {
-  console.log(color, primary)
-  primary ? this.props.setPrimaryColor(color) : this.props.setSecondaryColor(color)
+  debug(color, primary)
+  if (primary) {
+    this.props.setPrimaryColor(color)
+  } else {
+    this.props.setSecondaryColor(color)
+  }
 }
 
 obj.getColors = function () {
@@ -28,9 +36,10 @@ obj.getColors = function () {
     return <span>It's empty</span>
   }
   for (let i = 0; i < this.props.colors.length; i++) {
-    let element = this.props.colors[i]
+    const element = this.props.colors[i]
     colors.push(
-      <Color {...element} onSelectColor={this.onSelectColor} size={this.props.size} key={i} index={i} />
+      <Color {...element} onSelectColor={this.onSelectColor} size={this.props.size}
+        key={i} index={i} />
     )
   }
   if (colors.length === 0) {
@@ -40,9 +49,9 @@ obj.getColors = function () {
 }
 
 obj.render = function () {
-  return <div className='content-colors'>
+  return (<div className='content-colors'>
     {this.getColors()}
-  </div>
+  </div>)
 }
 
 const ContentColors = React.createClass(obj)

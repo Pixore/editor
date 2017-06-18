@@ -39,7 +39,7 @@ const addNewColor = (palette, color) => {
 }
 
 export const savePalette = (palette) => (dispatch, getState) => {
-  let pal = getState().palettes[palette]
+  const pal = getState().palettes[palette]
   return http.put('/api/palettes/' + pal._id, pal, function () {
     dispatch({
       type: SAVE_PALETTE,
@@ -49,7 +49,7 @@ export const savePalette = (palette) => (dispatch, getState) => {
 }
 
 export const addPalette = (palette) => (dispatch, getState) => {
-  let index = getState().palettes.length
+  const index = getState().palettes.length
   dispatch({
     type: ADD_PALETTE,
     payload: {

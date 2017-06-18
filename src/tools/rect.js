@@ -21,7 +21,7 @@ obj.onMouseDown = function (evt) {
 obj.onMouseLeave = function (evt) {
   if ((evt.toElement || evt.relatedTarget) !== document.children[0]) return
 
-  let newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
+  const newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
   lastPixel = newPixel
 }
 obj.onMouseMove = function (evt) {

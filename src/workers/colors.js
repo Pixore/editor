@@ -15,7 +15,7 @@ export const getTransparentColor = function (sprite, cb) {
   const { sprites } = store.getState()
   const frames = sprites[sprite].frames
 
-  let dataList = []
+  const dataList = []
   for (let i = 0; i < frames.length; i++) {
     dataList.push(getImageData(getContext(frames[i])))
   }
@@ -24,7 +24,7 @@ export const getTransparentColor = function (sprite, cb) {
 }
 
 function onMessage (evt) {
-  let cbsT = cbs[evt.data.type]
+  const cbsT = cbs[evt.data.type]
   for (let j = 0; j < cbsT.length; j++) {
     cbsT[j](evt.data.data)
   }
@@ -35,9 +35,9 @@ export const getSpritePalette = (sprite, transparent = false) => new Promise(res
   const state = store.getState()
   const frames = state.sprites[sprite].frames
 
-  let dataList = []
+  const dataList = []
   for (let i = 0; i < frames.length; i++) {
-    let layers = state.frames[frames[i]].layers
+    const layers = state.frames[frames[i]].layers
     for (let j = 0; j < layers.length; j++) {
       dataList.push(getImageData(getContext(layers[j])))
     }

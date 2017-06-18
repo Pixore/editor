@@ -1,3 +1,5 @@
+/* global self */
+
 import {rgbToHex, unusedColor} from '../utils/color'
 
 self.onmessage = function (evt) {
@@ -16,8 +18,8 @@ self.onmessage = function (evt) {
 }
 
 function getColors (dataList) {
-  let obj = {}
-  let array = []
+  const obj = {}
+  const array = []
   let color
   for (let i = 0; i < dataList.length; i++) {
     for (let j = 0; j < dataList[i].length; j = j + 4) {
@@ -35,20 +37,19 @@ function getColors (dataList) {
 }
 
 function getTransparent (dataList) {
-  let obj = {}
-  let transparent
+  const obj = {}
   for (let i = 0; i < dataList.length; i++) {
-    let data = dataList[i]
+    const data = dataList[i]
     for (let j = 0; j < data.length; j += 4) {
-      let r = data[j]
-      let g = data[j + 1]
-      let b = data[j + 2]
-      let color = r + '.' + g + '.' + b
+      const r = data[j]
+      const g = data[j + 1]
+      const b = data[j + 2]
+      const color = r + '.' + g + '.' + b
       if (!obj[color]) {
         obj[color] = true
       }
     }
   }
-  transparent = unusedColor(obj)
+  const transparent = unusedColor(obj)
   return rgbToHex(transparent.r, transparent.g, transparent.b)
 }

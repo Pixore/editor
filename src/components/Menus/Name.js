@@ -41,12 +41,18 @@ obj.onChange = function (evt) {
 }
 
 obj.render = function () {
-  return <form onSubmit={this.onSubmit} className='name-form'>
-    <Tooltipy text='blyat?' mode='bottom'>
-      <input className='name-sprite' onBlur={this.onSubmit} onChange={this.onChange} value={this.state.name} />
-    </Tooltipy>
-    <button type='submit'>submit</button>
-  </form>
+  return (
+    <form onSubmit={this.onSubmit} className='name-form'>
+      <Tooltipy text='blyat?' mode='bottom'>
+        <input
+          className='name-sprite'
+          onBlur={this.onSubmit}
+          onChange={this.onChange}
+          value={this.state.name} />
+      </Tooltipy>
+      <button type='submit'>submit</button>
+    </form>
+  )
 }
 
 const Name = React.createClass(obj)

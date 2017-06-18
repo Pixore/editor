@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 
 import ducks from './ducks'
 
-let middlewares = [
+const middlewares = [
   applyMiddleware(thunk)
 ]
 

@@ -112,10 +112,12 @@ obj.onClickBackdrop = function (evt) {
 }
 
 obj.getModal = function () {
-  return <div className='modal' style={{display: this.props.modalOpen ? 'block' : 'none'}}>
-    <div className='backdrop' onClick={this.onClickBackdrop} />
-    {this.getPanel()}
-  </div>
+  return (
+    <div className='modal' style={{display: this.props.modalOpen ? 'block' : 'none'}}>
+      <div className='backdrop' onClick={this.onClickBackdrop} />
+      {this.getPanel()}
+    </div>
+  )
 }
 
 obj.getClassName = function () {
@@ -127,14 +129,16 @@ obj.getClassName = function () {
 
 obj.getPanel = function () {
   var className = this.getClassName()
-  return <div style={this.getStylePanel()} className={className}>
-    {
-      this.getDragbar()
-    }
-    {
-      this.props.children
-    }
-  </div>
+  return (
+    <div style={this.getStylePanel()} className={className}>
+      {
+        this.getDragbar()
+      }
+      {
+        this.props.children
+      }
+    </div>
+  )
 }
 
 obj.render = function () {

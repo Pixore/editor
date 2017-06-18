@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { cuid } from 'react-dynamic-layout/lib'
+import { cuid, register } from 'react-dynamic-layout/lib'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { register } from 'react-dynamic-layout'
 
 import Frame from './Frame'
 
@@ -52,9 +51,9 @@ obj.componentWillReceiveProps = function (nextProps) {
 }
 
 obj.onClickAddFrame = function () {
-  let sprite = this.props.sprite.id
-  let numLayers = this.props.frames[this.props.frame].layers.length
-  let frame = this.createFrame({sprite})
+  const sprite = this.props.sprite.id
+  const numLayers = this.props.frames[this.props.frame].layers.length
+  const frame = this.createFrame({sprite})
   for (let j = 0; j < numLayers; j++) {
     this.createLayer({
       sprite,
@@ -66,9 +65,9 @@ obj.onClickAddFrame = function () {
 
 obj.createFrame = function ({sprite, context}) {
   var currentFrame = this.props.frames[this.props.frame]
-  let width = currentFrame.width
-  let height = currentFrame.height
-  let frame = cuid()
+  const width = currentFrame.width
+  const height = currentFrame.height
+  const frame = cuid()
   this.props.addFrame({
     id: frame,
     width,
@@ -87,16 +86,17 @@ obj.onSelect = function (frame) {
 obj.getList = function () {
   if (!this.props.sprite || !this.props.frame) return []
 
-  let children = []
+  const children = []
   for (let j = 0; j < this.props.sprite.frames.length; j++) {
-    let frame = this.props.frames[this.props.sprite.frames[j]]
-    let className = classNames(
+    const frame = this.props.frames[this.props.sprite.frames[j]]
+    const className = classNames(
       'preview-frames',
       { 'active': this.props.frame === frame.id }
     )
     children.push(
       <li className={className} style={{width: this.state.size, height: this.state.size}} key={j}>
-        <Frame data={frame} onSelect={this.onSelect} size={this.state.size} index={j} />
+        <Frame data={frame} onSelect={this.onSelect} size={this.state.size}
+          index={j} />
       </li>
     )
   }
@@ -104,14 +104,14 @@ obj.getList = function () {
 }
 
 obj.render = function () {
-  return <div className={'frames ' + this.props.className} style={this.props.style}>
+  return (<div className={'frames ' + this.props.className} style={this.props.style}>
     <button className='add-frame btn' onClick={this.onClickAddFrame}>add frame</button>
     <div className='list-content'>
       <ul className='list frames-list' ref={list => { this.list = list }}>
         {this.getList()}
       </ul>
     </div>
-  </div>
+  </div>)
 }
 
 obj.createLayer = function ({sprite, frame, context, width, height}) {

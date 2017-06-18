@@ -1,21 +1,24 @@
 import { expect } from 'chai'
 import { createSprite } from './sprites'
 import { store } from '../store'
+import createDebug from 'debug'
+
+const debug = createDebug()
 
 describe('utils sprite', function () {
   it('use all default params', function () {
     createSprite()
-    let state = store.getState()
-    console.log(
+    const state = store.getState()
+    debug(
       state.Editor.sprites
     )
-    console.log(
+    debug(
       state.Editor.frames[0]
     )
-    console.log(
+    debug(
       state.Editor.layers[0]
     )
-    console.log(
+    debug(
       state.sprites[0]
     )
     expect(true).to.be.true

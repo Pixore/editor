@@ -5,16 +5,20 @@ import { getContext } from '../../constants'
 // import { ModalManager } from 'react-dynamic-modal'
 // import Login from '../../../../modals/Login'
 
+import createDebug from 'debug'
+
+const debug = createDebug('')
+
 export const onResize = function () {
-  alert('resize')
+  debug('resize')
 }
 
 export const onSetBackground = function () {
-  alert('setBackgroud')
+  debug('setBackgroud')
 }
 
 export const onLogin = function () {
-  console.log('now save the sprite')
+  debug('now save the sprite')
 }
 
 export const onSave = function () {
@@ -23,29 +27,31 @@ export const onSave = function () {
   // }
   const { frames, sprite } = this.props
 
-  let self = this
-  let numFrames = sprite.frames.length
-  let numLayers = frames[sprite.frames[0]].layers.length
-  let isGif = sprite.frames.length > 1
-  let isNew = !sprite._id
-  let context = document.createElement('canvas').getContext('2d')
-  let width = numLayers * sprite.width
-  let height = numFrames * sprite.height
-  let files = []
+  const self = this
+  const numFrames = sprite.frames.length
+  const numLayers = frames[sprite.frames[0]].layers.length
+  const isGif = sprite.frames.length > 1
+  const isNew = !sprite._id
+  const context = document.createElement('canvas').getContext('2d')
+  const width = numLayers * sprite.width
+  const height = numFrames * sprite.height
+  const files = []
 
   context.canvas.width = width
   context.canvas.height = height
 
   sprite.frames.forEach((item, index) => {
-    let frame = this.saveFrame(item)
+    const frame = this.saveFrame(item)
     context.drawImage(frame.canvas,
       0, 0, width, sprite.height,
       0, sprite.height * index, width, sprite.height
     )
   })
-  isGif
-    ? this.generateGif(sprite, 1, onGeneratePreview)
-    : getContext(sprite.frames[0]).canvas.toBlob(onGeneratePreview)
+  if (isGif) {
+    this.generateGif(sprite, 1, onGeneratePreview)
+  } else {
+    getContext(sprite.frames[0]).canvas.toBlob(onGeneratePreview)
+  }
 
   function onGeneratePreview (blob) {
     files.push({file: blob, name: 'preview.' + (isGif ? 'gif' : 'png')})
@@ -80,13 +86,13 @@ export const onSave = function () {
       this.props.setSpriteId(sprite.id, result.description)
       this.props.saveEditor()
     }
-    console.log('save result', result)
+    debug('save result', result)
   }
   return context.canvas
 }
 
 export const generateGif = function (sprite, scale, cb) {
-  let gif = new Gif({
+  const gif = new Gif({
     quality: 1,
     repeat: 0,
     height: sprite.height * scale,
@@ -98,7 +104,7 @@ export const generateGif = function (sprite, scale, cb) {
   generate.call(this, sprite.transparent)
 
   function generate (transparent) {
-    let transparentDec = parseInt(transparent.substring(1), 16)
+    const transparentDec = parseInt(transparent.substring(1), 16)
     for (let i = 0; i < sprite.frames.length; i++) {
       gif.addFrame(
         noTransparent(this.props.frames[sprite.frames[i]].context, scale, transparent),
@@ -113,14 +119,14 @@ export const generateGif = function (sprite, scale, cb) {
 
 export const saveFrame = function (index) {
   const { frames, layers } = this.props
-  let frame = frames[index]
-  let context = document.createElement('canvas').getContext('2d')
+  const frame = frames[index]
+  const context = document.createElement('canvas').getContext('2d')
   context.canvas.width = frame.layers.length * frame.width
   context.canvas.height = frame.height
   frame.layers.forEach(onForEach.bind(this))
 
   function onForEach (item, index) {
-    let layer = layers[item]
+    const layer = layers[item]
     context.drawImage(getContext(layer.id).canvas,
       0, 0, layer.width, layer.height,
       index * layer.width, 0, layer.width, layer.height

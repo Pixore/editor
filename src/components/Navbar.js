@@ -20,14 +20,14 @@ obj.onLogin = function (evt) {
 obj.render = function () {
   let profile
   if (this.props.user) {
-    profile = <div className='nav-item img dropdown'>
+    profile = (<div className='nav-item img dropdown'>
       <img src={this.props.user.profileImage} />
-    </div>
+    </div>)
   } else {
     profile = <a href='' className='nav-item' onClick={this.onLogin}>Login / Sign in</a>
   }
 
-  return <nav className='navbar'>
+  return (<nav className='navbar'>
     <div className='navbar-header'>
       <a className='navbar-brand'><h2>Pixore</h2></a>
     </div>
@@ -35,7 +35,7 @@ obj.render = function () {
       { profile }
       <Link className='nav-item btn' to='/editor'>Start drawing</Link>
     </div>
-  </nav>
+  </nav>)
     // <div className='navbar-collapse collapse'>
     //   <ul>
     //     <li></li>

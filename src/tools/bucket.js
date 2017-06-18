@@ -6,7 +6,7 @@ const obj = {}
 let color, oldColor
 
 obj.onMouseDown = function (evt) {
-  let newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
+  const newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
   if (evt.target.nodeName !== 'CANVAS' && !validCord(this.layer, newPixel)) return
 
   this.savedData = getImageData(this.prevStatus)

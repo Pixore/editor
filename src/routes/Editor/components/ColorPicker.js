@@ -15,6 +15,10 @@ import {
   addColor
 } from '../../../ducks'
 
+import createDebug from 'debug'
+
+const debug = createDebug()
+
 const { round } = Math
 const $window = $(window)
 const noop = function () {}
@@ -247,7 +251,7 @@ obj.onClickOK = function () {
   // this.props.setStyle('colorPicker', {
   //   visibility: 'hidden'
   // })
-  console.log(action, palette, this.state.color)
+  debug(action, palette, this.state.color)
   switch (action) {
     case 'addColor':
       this.props.addColor(
@@ -289,7 +293,7 @@ obj.render = function () {
   var gradient = 'linear-gradient(to right, transparent 0%, ' + background + ' 100%)'
   var rgba = getRGBAComponents(this.state.color)
   rgba[3] = round(rgba[3] * 100)
-  return <div className='color-picker'>
+  return (<div className='color-picker'>
     <div className='hsla' style={{height: totalSize, width: totalSize}}>
       <div className='sl' onMouseDown={this.onMouseDownSB} style={{height: size, width: size, background: background}}>
         <div className='l' />
@@ -309,23 +313,27 @@ obj.render = function () {
     <Color color={this.state.color} size={36} onClick={noop} />
     <div className='input-group' >
       <label>R</label>
-      <Range value={rgba[0]} onChange={this.getHandleRGBA(0)} min={0} max={255} />
+      <Range value={rgba[0]} onChange={this.getHandleRGBA(0)} min={0}
+        max={255} />
     </div>
     <div className='input-group' >
       <label>G</label>
-      <Range value={rgba[1]} onChange={this.getHandleRGBA(1)} min={0} max={255} />
+      <Range value={rgba[1]} onChange={this.getHandleRGBA(1)} min={0}
+        max={255} />
     </div>
     <div className='input-group' >
       <label>B</label>
-      <Range value={rgba[2]} onChange={this.getHandleRGBA(2)} min={0} max={255} />
+      <Range value={rgba[2]} onChange={this.getHandleRGBA(2)} min={0}
+        max={255} />
     </div>
     <div className='input-group' >
       <label>A</label>
-      <Range value={rgba[3]} onChange={this.getHandleRGBA(3)} min={0} max={100} />
+      <Range value={rgba[3]} onChange={this.getHandleRGBA(3)} min={0}
+        max={100} />
     </div>
     <button className='btn' onClick={this.onClickOK}>OK</button>
     <button className='btn' onClick={this.onClickCancel}>Cancel</button>
-  </div>
+  </div>)
 }
 
 const ColorPicker = connect(null, {

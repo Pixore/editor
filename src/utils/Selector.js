@@ -1,3 +1,6 @@
+import createDebug from 'debug'
+
+const errorDebug = createDebug('error')
 
 const hasVal = (val) => {
   return typeof val !== 'undefined' && val !== null
@@ -19,10 +22,10 @@ function Selector () {
   }
 }
 function dimensions (prop, val, type) {
-  let suffix = window === this[0] ? 'inner' : (type ? 'client' : 'offset')
+  const suffix = window === this[0] ? 'inner' : (type ? 'client' : 'offset')
   if (hasVal(val)) {
     if (typeof val === 'number') {
-      let dim = 'px'
+      const dim = 'px'
       for (let i = 0; i < this.length; i++) {
         this[i].style.width = val + dim
       }
@@ -55,7 +58,7 @@ Selector.prototype.on = function (name, handler, bind = true) {
       })
     }
     if (!hasVal(suffix)) {
-      return console.error('Event error name')
+      return errorDebug('Event error name')
     }
     if (!hasVal(this[i]._events[name])) {
       this[i]._events[name] = {}
@@ -64,7 +67,7 @@ Selector.prototype.on = function (name, handler, bind = true) {
       this[i]._events[name][suffix] = bind ? handler.bind(this[i]) : handler
       this[i].addEventListener(name, this[i]._events[name][suffix])
     } else {
-      console.error('Event wrong name', arguments)
+      errorDebug('Event wrong name', arguments)
     }
   }
   return this
@@ -73,12 +76,12 @@ Selector.prototype.on = function (name, handler, bind = true) {
 Selector.prototype.offEach = function (name, suffix, i) {
   if (!hasVal(suffix)) {
     if (hasVal(this[i]._events[name])) {
-      for (let i in this[i]._events[name]) {
+      for (const i in this[i]._events[name]) {
         this[i].removeEventListener(name, this[i]._events[name][i])
       }
       delete this[i]._events[name]
     } else {
-      for (let i in this[i]._events) {
+      for (const i in this[i]._events) {
         if (hasVal(this[i]._events[i][name])) {
           this[i].removeEventListener(i, this[i]._events[i][name])
           delete this[i]._events[i][name]

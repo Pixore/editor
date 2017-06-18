@@ -32,7 +32,7 @@ obj.previewPaint = function (x, y) {
 }
 obj.onMouseMove = function (evt) {
   if (this.clicked) {
-    let newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
+    const newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
     if (validCord(this.layer, newPixel) || validCord(this.layer, lastPixel)) {
       this.preview.canvas.width = this.preview.canvas.width
       this.lineBetween(lastPixel.x, lastPixel.y, newPixel.x, newPixel.y, at)
@@ -57,7 +57,7 @@ obj.onMouseUp = function (evt) {
     } else {
       at = this.paint
     }
-    let newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
+    const newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
     if (validCord(this.layer, newPixel) || validCord(this.layer, lastPixel)) {
       this.preview.canvas.width = this.preview.canvas.width
       this.lineBetween(lastPixel.x, lastPixel.y, newPixel.x, newPixel.y, at)

@@ -1,4 +1,7 @@
 import axios from 'axios'
+import createDebug from 'debug'
+
+const debug = createDebug('')
 
 const parseJSON = response => response.data
 
@@ -43,12 +46,12 @@ export const put = function (url, body) {
 export const upload = function (url, data, files, method) {
   const form = new FormData()
   for (let j = 0; j < files.length; j++) {
-    let element = files[j]
+    const element = files[j]
     form.append('files', element.file, element.name)
   }
   form.append('body', JSON.stringify(data))
   for (var key of form.values()) {
-    console.log(typeof key)
+    debug(typeof key)
   }
   return request(url, method, form, false)
 }

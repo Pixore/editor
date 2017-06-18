@@ -2,6 +2,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { LEFT_CLICK } from '../../../constants/index'
+import createDebug from 'debug'
+
+const debug = createDebug()
+
 const obj = {}
 
 obj.displayName = 'DragColor'
@@ -18,7 +22,7 @@ obj.propTypes = {
 }
 
 obj.onMouseDown = function () {
-  console.log('onMouseDown color')
+  debug('onMouseDown color')
   // var name = this.props.name.replace(' ', '')
   // var stats = evt.target.getBoundingClientRect()
   // var diffX = evt.clientX - stats.left
@@ -67,9 +71,10 @@ obj.render = function () {
     width: this.props.size,
     height: this.props.size
   }
-  return <div className='drag-color transparent-bkg' style={styleBackground} onContextMenu={this.onClick} onClick={this.onClick} onMouseDown={this.onMouseDown}>
+  return (<div className='drag-color transparent-bkg' style={styleBackground} onContextMenu={this.onClick}
+    onClick={this.onClick} onMouseDown={this.onMouseDown}>
     <div style={styleColor} />
-  </div>
+  </div>)
 }
 
 const Color = React.createClass(obj)

@@ -1,8 +1,8 @@
-let platform = navigator.platform.toLowerCase()
-let ua = navigator.userAgent.toLowerCase()
-let UA = ua.match(/(opera|ie|firefox|chrome|version)[s/:]([wd.]+)?.*?(safari|version[s/:]([wd.]+)|$)/) || [null, 'unknown', 0]
-let mode = UA[1] === 'ie' && document.documentMode
-let browser = {
+const platform = navigator.platform.toLowerCase()
+const ua = navigator.userAgent.toLowerCase()
+const UA = ua.match(/(opera|ie|firefox|chrome|version)[s/:]([wd.]+)?.*?(safari|version[s/:]([wd.]+)|$)/) || [null, 'unknown', 0]
+const mode = UA[1] === 'ie' && document.documentMode
+const browser = {
   name: UA[1] === 'version' ? UA[3] : UA[1],
   version: mode || parseFloat(UA[1] === 'opera' && UA[4] ? UA[4] : UA[2]),
   platform: {

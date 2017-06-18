@@ -14,6 +14,9 @@ import {
   setSpriteId,
   putName
 } from '../../ducks'
+import createDebug from 'debug'
+
+const debug = createDebug()
 
 const obj = Object.assign({}, events)
 
@@ -45,21 +48,23 @@ obj.getName = function () {
 let menuCount = -1
 obj.getMenu = function (name = 'menu unname', handle = noopF, children = []) {
   menuCount++
-  return <li key={menuCount} className={'menu ' + name.toLowerCase().replace(/ /g, '-')} onClick={handle}>
-    {name}
-    {
-      children.length === 0 ? '' : <ul className='list-menus'>
-        {children}
-      </ul>
-    }
-  </li>
+  return (
+    <li key={menuCount} className={'menu ' + name.toLowerCase().replace(/ /g, '-')} onClick={handle}>
+      {name}
+      {
+        children.length === 0 ? '' : <ul className='list-menus'>
+          {children}
+        </ul>
+      }
+    </li>
+  )
 }
 obj.shouldComponentUpdate = function (nextProps) {
   return nextProps.spriteId !== this.props.spriteId
 }
 
 obj.onSubmitName = function (name) {
-  console.log(this.props.putName(this.props.sprite, name))
+  debug(this.props.putName(this.props.sprite, name))
 }
 
 obj.openNewSpriteModal = function () {
@@ -67,20 +72,22 @@ obj.openNewSpriteModal = function () {
 }
 
 obj.render = function () {
-  return <div className='header' >
-    <a href='/'>
-      <image className='logo' />
-    </a>
-    <Menu active inline>
-      <Proyect openNewSpriteModal={this.openNewSpriteModal} />
-      <Menu child>
-        Sprite
-        <li onClick={this.onResize}>resize</li>
-        <li onClick={this.onSetBackground}>set background</li>
+  return (
+    <div className='header' >
+      <a href='/'>
+        <image className='logo' />
+      </a>
+      <Menu active inline>
+        <Proyect openNewSpriteModal={this.openNewSpriteModal} />
+        <Menu child>
+          Sprite
+          <li onClick={this.onResize}>resize</li>
+          <li onClick={this.onSetBackground}>set background</li>
+        </Menu>
       </Menu>
-    </Menu>
-    <Name name={this.getName()} onSubmit={this.onSubmitName} />
-  </div>
+      <Name name={this.getName()} onSubmit={this.onSubmitName} />
+    </div>
+  )
 }
 
 function mapStateToProps (state) {

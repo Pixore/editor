@@ -18,18 +18,20 @@ obj.propTypes = {
 }
 
 obj.render = function () {
-  return <Panel name='History' visible={this.props.visible}>
-    <ul className='list-redo' style={{display: 'none'}}>
-      {
-        this.props.redo.map((item, index) => <li className='action' key={index}>{item.type}</li>)
-      }
-    </ul>
-    <ul className='list-undo' style={{display: 'none'}}>
-      {
-        this.props.undo.map((item, index) => <li className='action' key={index}>{item.type}</li>)
-      }
-    </ul>
-  </Panel>
+  return (
+    <Panel name='History' visible={this.props.visible}>
+      <ul className='list-redo' style={{display: 'none'}}>
+        {
+          this.props.redo.map((item, index) => <li className='action' key={index}>{item.type}</li>)
+        }
+      </ul>
+      <ul className='list-undo' style={{display: 'none'}}>
+        {
+          this.props.undo.map((item, index) => <li className='action' key={index}>{item.type}</li>)
+        }
+      </ul>
+    </Panel>
+  )
 }
 obj.componentDidMount = function () {
 

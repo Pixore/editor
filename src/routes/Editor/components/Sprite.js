@@ -17,15 +17,16 @@ obj.propTypes = {
 }
 
 obj.render = function () {
-  return <canvas
-    style={this.props.style}
-    className='transparent-bkg'
-    width={this.props.width}
-    height={this.props.height}
- />
+  return (
+    <canvas
+      style={this.props.style}
+      className='transparent-bkg'
+      width={this.props.width}
+      height={this.props.height} />
+  )
 }
 obj.componentDidMount = function () {
-  let context = ReactDOM.findDOMNode(this).getContext('2d')
+  const context = ReactDOM.findDOMNode(this).getContext('2d')
   this.setState({
     context: context
   })

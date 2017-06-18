@@ -36,7 +36,7 @@ obj.paintPreview = function (cord, context, artboard) {
   if (artboard.select) {
     // this.paintAreaSelect()
   }
-  let realCord = {
+  const realCord = {
     x: cord.x * artboard.scale + artboard.x,
     y: cord.y * artboard.scale + artboard.y
   }
@@ -51,11 +51,11 @@ obj.getInitialState = function () {
 }
 
 obj.render = function () {
-  return <canvas
+  return (<canvas
     style={this.props.style}
     width={this.props.size.width}
     height={this.props.size.height}
-    className='preview' />
+    className='preview' />)
 }
 
 const Preview = React.createClass(obj)

@@ -26,7 +26,7 @@ it('initialState is an empty array', () => {
 it('types name', () => {
   const keys = Object.keys(types)
   for (let i = 0; i < keys.length; i++) {
-    let type = keys[i]
+    const type = keys[i]
     expect(type === keys[i]).to.be.true
   }
 })

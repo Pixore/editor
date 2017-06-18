@@ -24,8 +24,8 @@ obj.propTypes = {
 }
 
 obj.componentDidMount = function () {
-  let el = ReactDOM.findDOMNode(this)
-  let stats = el.getBoundingClientRect()
+  const el = ReactDOM.findDOMNode(this)
+  const stats = el.getBoundingClientRect()
   this.setState({
     stats,
     marginTop: -stats.top,
@@ -52,7 +52,7 @@ obj.render = function () {
     return <div />
   }
   const frame = frames[sprite.frame]
-  return <div style={style} className='content-canvas'>
+  return (<div style={style} className='content-canvas'>
     <Canvas
       width={width}
       height={height}
@@ -64,7 +64,7 @@ obj.render = function () {
       secondaryColor={sprite.secondaryColor}
       tool={tool}
     />
-  </div>
+  </div>)
 }
 
 function mapStateToProps (state) {

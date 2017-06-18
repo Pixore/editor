@@ -17,7 +17,7 @@ obj.saveRef = function (element) {
 
 obj.render = function () {
   const { Component, ...props } = this.props
-  return <Component context={this.state} {...props} >
+  return (<Component context={this.state} {...props} >
     <canvas ref={this.saveRef} />
-  </Component>
+  </Component>)
 }

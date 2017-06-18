@@ -21,7 +21,7 @@ obj.propTypes = {
 }
 
 obj.componentDidMount = function () {
-  let context = this.refs.canvas.getContext('2d')
+  const context = this.refs.canvas.getContext('2d')
   this.setState({ context })
   this.props.setContext('main', context)
 }
@@ -39,8 +39,8 @@ obj.shouldComponentUpdate = function (nextProps, nextState) {
 }
 
 obj.paint = function (context, artboard, layer) {
-  let width = (layer.width * artboard.scale)
-  let height = (layer.height * artboard.scale)
+  const width = (layer.width * artboard.scale)
+  const height = (layer.height * artboard.scale)
   clean(context.canvas)
   imageSmoothingDisabled(context)
   context.drawImage(getContext(layer.id).canvas,
@@ -55,12 +55,12 @@ obj.componentDidUpdate = function () {
 }
 
 obj.render = function () {
-  return <canvas
+  return (<canvas
     ref='canvas'
     style={this.props.style}
     width={this.props.size.width}
     height={this.props.size.height}
-    className='main' />
+    className='main' />)
 }
 
 const Main = React.createClass(obj)

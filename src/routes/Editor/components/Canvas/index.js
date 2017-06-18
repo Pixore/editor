@@ -32,7 +32,7 @@ obj.propTypes = {
 
 var out
 obj.onWheel = function (evt) {
-  let deltaY = evt.deltaY
+  const deltaY = evt.deltaY
   if (out) {
     return
   }
@@ -51,15 +51,15 @@ obj.onWheel = function (evt) {
   }, 40)
 }
 obj.setScale = function (scale) {
-  let {sprite: {artboard}} = this.props
-  let layer = this.props.layer
-  let diffX, diffY
+  const {sprite: {artboard}} = this.props
+  const layer = this.props.layer
+
   if (scale < 1) {
     return
   }
 
-  diffX = (layer.width * scale) - (artboard.scale * layer.width)
-  diffY = (layer.height * scale) - (artboard.scale * layer.height)
+  const diffX = (layer.width * scale) - (artboard.scale * layer.width)
+  const diffY = (layer.height * scale) - (artboard.scale * layer.height)
 
   this.props.setSpriteArtboard(this.props.sprite.id, {
     x: artboard.x - Math.round(diffX / 2),
@@ -78,8 +78,8 @@ obj.getInitialState = function () {
   return {}
 }
 obj.componentDidMount = function () {
-  let el = ReactDOM.findDOMNode(this)
-  let stats = el.parentElement.getBoundingClientRect()
+  const el = ReactDOM.findDOMNode(this)
+  const stats = el.parentElement.getBoundingClientRect()
   this.setState({
     stats,
     marginTop: -stats.top,
@@ -91,8 +91,8 @@ obj.componentDidMount = function () {
 }
 
 obj.setContextType = function (type, context) {
-  let state = {}
-  let $canvas = $(context.canvas)
+  const state = {}
+  const $canvas = $(context.canvas)
   state[type] = {
     context,
     $canvas
@@ -108,8 +108,8 @@ obj.setContextType = function (type, context) {
 obj.getLayers = function (props) {
   const layers = []
   for (let index = 0; index < this.props.frame.layers.length; index++) {
-    let layer = this.props.layers[this.props.frame.layers[index]]
-    let finalProps = Object.assign({ /* , zIndex: index + 1 */}, props, {layer})
+    const layer = this.props.layers[this.props.frame.layers[index]]
+    const finalProps = Object.assign({ /* , zIndex: index + 1 */}, props, {layer})
     if (layer.id === this.props.layer.id) {
       layers.push(
         <Layer {...finalProps} ref='active' key={index} />
@@ -124,23 +124,23 @@ obj.getLayers = function (props) {
 }
 
 obj.render = function () {
-  let {width, height, layer} = this.props
-  let artboard = this.props.sprite.artboard || {}
-  let setContext = this.setContextType
-  let style = {
+  const {width, height, layer} = this.props
+  const artboard = this.props.sprite.artboard || {}
+  const setContext = this.setContextType
+  const style = {
     width,
     height,
     marginLeft: this.state.marginLeft,
     marginTop: this.state.marginTop
   }
-  let size = { width, height }
-  var props = {
+  const size = { width, height }
+  const props = {
     size,
     artboard,
     layer,
     setContext
   }
-  return <div style={style} className='canvas' onWheel={this.onWheel}>
+  return (<div style={style} className='canvas' onWheel={this.onWheel}>
     <Background {...{width, height, artboard, layer, setContext}} />
     <Main {...props} />
     <Preview {...props} />
@@ -148,7 +148,7 @@ obj.render = function () {
     <Menu active={this.state.activeContextMenu} position={this.state.contextMenuPosition}>
       <li onClick={this.onCenter}>Center</li>
     </Menu>
-  </div>
+  </div>)
 }
 
 const Canvas = connect(

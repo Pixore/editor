@@ -47,25 +47,27 @@ obj.propTypes = {
 }
 obj.render = function () {
   if (this.props.child) {
-    return <li>
+    return (<li>
       {this.props.children[0]}
       <ul className='menu'>{React.Children.toArray(this.props.children).slice(1)}</ul>
-    </li>
+    </li>)
   }
-  let style = {
+  const style = {
     top: this.props.position.y,
     left: this.props.position.x
   }
-  let className = classNames(
+  const className = classNames(
     'content-menu',
     { 'inline': this.props.inline,
       'hidden': !this.props.active }
   )
-  return <div className={className} style={style} >
-    <ul className='menu main'>
-      {this.props.children}
-    </ul>
-  </div>
+  return (
+    <div className={className} style={style} >
+      <ul className='menu main'>
+        {this.props.children}
+      </ul>
+    </div>
+  )
 }
 
 const Menu = React.createClass(obj)

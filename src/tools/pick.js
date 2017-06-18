@@ -6,7 +6,7 @@ const obj = {}
 
 obj.onMouseDown = function (evt) {
   if (evt.target.nodeName !== 'CANVAS') return
-  let newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
+  const newPixel = calculatePosition(this.artboard, evt.clientX, evt.clientY)
   if (!validCord(this.layer, newPixel)) return
   newPixel.color = getColorPixel(this.layer.width, newPixel, this.context)
   if (evt.which === this.RIGHT_CLICK) {

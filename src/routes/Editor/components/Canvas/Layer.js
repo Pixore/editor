@@ -35,8 +35,8 @@ obj.paint = function (context, artboard, layer) {
   context = context || this.state.context
   artboard = artboard || this.props.artboard
   layer = layer || this.props.layer
-  let width = (layer.width * artboard.scale)
-  let height = (layer.height * artboard.scale)
+  const width = (layer.width * artboard.scale)
+  const height = (layer.height * artboard.scale)
   clean(context)
   imageSmoothingDisabled(context)
   context.drawImage(getContext(layer.id).canvas,
@@ -55,11 +55,11 @@ obj.componentDidMount = function () {
 }
 
 obj.render = function () {
-  return <canvas
+  return (<canvas
     ref='canvas'
     width={this.props.width}
     height={this.props.height}
-    className='layer' />
+    className='layer' />)
 }
 
 const Layer = React.createClass(obj)

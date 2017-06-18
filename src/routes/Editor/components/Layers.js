@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { cuid } from 'react-dynamic-layout/lib'
+import { cuid, register } from 'react-dynamic-layout/lib'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { register } from 'react-dynamic-layout'
 
 import Layer from './Layer'
 import {
@@ -84,10 +83,10 @@ obj.onSelect = function (index) {
 
 obj.getList = function () {
   if (!this.props.sprite || !Number.isInteger(this.props.sprite.layer)) return []
-  let children = []
+  const children = []
   for (let j = 0; j < this.props.frame.layers.length; j++) {
-    let layer = this.props.layers[this.props.frame.layers[j]]
-    let className = classNames(
+    const layer = this.props.layers[this.props.frame.layers[j]]
+    const className = classNames(
       'preview-layer',
       { 'active': this.props.sprite.layer === j }
     )
@@ -106,14 +105,16 @@ obj.getList = function () {
 }
 
 obj.render = function () {
-  return <div className={'layers ' + this.props.className} style={this.props.style}>
-    <button className='btn add-layer' onClick={this.onClickAddLayer}>add layer</button>
-    <div className='list-content'>
-      <ul className='list layers-list' ref='list'>
-        {this.getList()}
-      </ul>
+  return (
+    <div className={'layers ' + this.props.className} style={this.props.style}>
+      <button className='btn add-layer' onClick={this.onClickAddLayer}>add layer</button>
+      <div className='list-content'>
+        <ul className='list layers-list' ref='list'>
+          {this.getList()}
+        </ul>
+      </div>
     </div>
-  </div>
+  )
 }
 
 const Layers = connect(

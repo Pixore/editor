@@ -6,7 +6,7 @@ export const downloadBlob = function downloadBlob (file, name) {
     saveAs(file, name)
   } else {
     file = window.URL.createObjectURL(file)
-    let link = make('a', {
+    const link = make('a', {
       parent: document.body,
       href: file,
       download: name

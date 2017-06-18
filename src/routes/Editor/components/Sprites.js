@@ -12,6 +12,10 @@ import {
 } from '../../../ducks'
 import http from '../../../utils/http'
 
+import createDebug from 'debug'
+
+const debug = createDebug()
+
 const obj = {}
 
 obj.propTypes = {
@@ -32,9 +36,11 @@ obj.render = function () {
   const style = {
     height: '100%'
   }
-  return <div style={style} className={divClassName}>
-    {this.getTabs()}
-  </div>
+  return (
+    <div style={style} className={divClassName}>
+      {this.getTabs()}
+    </div>
+  )
 }
 
 obj.onClickTab = function (evt, sprite) {
@@ -52,7 +58,7 @@ obj.shouldComponentUpdate = function (nextProps) {
 
 obj.componentDidUpdate = function (prevProps) {
   if (prevProps.filter.length !== this.props.filter.length) {
-    let sprites = this.props.filter
+    const sprites = this.props.filter
       .filter(index => !!this.props.sprites[index]._id)
       .map(index => this.props.sprites[index]._id)
     if (this.props.editorId) {
@@ -62,16 +68,16 @@ obj.componentDidUpdate = function (prevProps) {
     } else {
       http.post('/api/editor/', {
         sprites
-      }).then(id => this.props.setEditorId(id)).catch(console.log)
+      }).then(id => this.props.setEditorId(id)).catch(debug)
     }
   }
 }
 
 obj.getTabs = function () {
-  let tabs = []
+  const tabs = []
   for (let j = 0; j < this.props.filter.length; j++) {
-    let sprite = this.props.sprites[this.props.filter[j]]
-    let className = classNames(
+    const sprite = this.props.sprites[this.props.filter[j]]
+    const className = classNames(
       'rdl-tab',
       sprite.name.replace(' ', '-').toLowerCase(),
       { 'active': sprite.id === this.props.sprite }

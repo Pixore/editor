@@ -12,6 +12,10 @@ import {
 
 import { RIGHT_CLICK, getContext } from '../constants'
 
+import createDebug from 'debug'
+
+const debug = createDebug()
+
 const { abs } = Math
 const common = {}
 
@@ -23,8 +27,8 @@ const cordLayerToPaint = (cord, artboard) => ({
 common.RIGHT_CLICK = RIGHT_CLICK
 
 common.getColor = function (which) {
-  let state = store.getState()
-  let sprite = state.sprites[this.layer.sprite]
+  const state = store.getState()
+  const sprite = state.sprites[this.layer.sprite]
   return which === RIGHT_CLICK ? sprite.secondaryColor : sprite.primaryColor
 }
 
@@ -86,8 +90,8 @@ common.newVersion = function (layer) {
 }
 
 common.getRectangle = function (x1, y1, x2, y2, color, fn) {
-  let stepX = x1 < x2 ? 1 : -1
-  let stepY = y1 < y2 ? 1 : -1
+  const stepX = x1 < x2 ? 1 : -1
+  const stepY = y1 < y2 ? 1 : -1
   let diffX = Math.abs(x1 - x2)
   let diffY = Math.abs(y1 - y2)
   let tempX1 = x1
@@ -114,15 +118,15 @@ common.getRectangle = function (x1, y1, x2, y2, color, fn) {
 }
 
 common.fill = function (initCord, newColor, oldColor, fn) {
-  let stack = [initCord]
+  const stack = [initCord]
   let current
   let aside
-  let numPixels = 4 * (this.layer.width * this.layer.height)
+  const numPixels = 4 * (this.layer.width * this.layer.height)
   let count = 0
-  let dy = [-1, 0, 1, 0]
-  let dx = [0, 1, 0, -1]
-  let newComponents = getRGBAComponents(newColor)
-  let oldComponents = getRGBAComponents(oldColor)
+  const dy = [-1, 0, 1, 0]
+  const dx = [0, 1, 0, -1]
+  const newComponents = getRGBAComponents(newColor)
+  const oldComponents = getRGBAComponents(oldColor)
 
   if (!isSameColor(
         this.savedData,
@@ -164,10 +168,10 @@ common.fill = function (initCord, newColor, oldColor, fn) {
 }
 
 common.lineBetween = function (x1, y1, x2, y2, fn) {
-  let dx = abs(x2 - x1)
-  let dy = abs(y2 - y1)
-  let sx = (x1 < x2) ? 1 : -1
-  let sy = (y1 < y2) ? 1 : -1
+  const dx = abs(x2 - x1)
+  const dy = abs(y2 - y1)
+  const sx = (x1 < x2) ? 1 : -1
+  const sy = (y1 < y2) ? 1 : -1
   let err = dx - dy
   let e2
   while (x1 !== x2 || y1 !== y2) {
@@ -183,7 +187,7 @@ common.lineBetween = function (x1, y1, x2, y2, fn) {
   fn(x1, y1)
 }
 
-common.onMouseDown = () => console.log('Create onMouseDown function')
+common.onMouseDown = () => debug('Create onMouseDown function')
 
 common.onMouseDownInit = function (evt, initCord, layer, artboard, {main, preview, background, mask}) {
   const context = getContext(layer.id)
@@ -200,7 +204,7 @@ common.onMouseDownInit = function (evt, initCord, layer, artboard, {main, previe
 }
 
 export function create (name, custom) {
-  let tool = Object.create(common)
+  const tool = Object.create(common)
   Object.keys(common).concat(
     Object.keys(custom)
   ).forEach(key => {

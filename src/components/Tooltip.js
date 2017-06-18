@@ -18,7 +18,7 @@ obj.shouldComponentUpdate = function () {
 }
 
 obj.onSetStatus = function (active, text, stats, mode) {
-  let el = this.refs.el
+  const el = this.refs.el
   let top
   let left
   if (!stats) {
@@ -27,7 +27,7 @@ obj.onSetStatus = function (active, text, stats, mode) {
 
   el.className = 'tooltip active ' + mode
   el.textContent = text
-  let { clientWidth } = el
+  const { clientWidth } = el
 
   top = stats.top
   left = stats.left

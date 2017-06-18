@@ -1,3 +1,5 @@
+/* global self */
+
 import GIFEncoder from '../utils/gif/GIFEncoder'
 
 function renderFrame (frame) {

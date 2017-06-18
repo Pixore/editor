@@ -12,6 +12,9 @@ import {
   saveEditor,
   setSpriteId
 } from '../../ducks'
+import createDebug from 'debug'
+
+const debug = createDebug()
 
 const generateGif = (sprite, scale) => new Promise(resolve => {
   const transparent = parseInt(sprite.transparent.substring(1), 16)
@@ -32,14 +35,14 @@ const generateGif = (sprite, scale) => new Promise(resolve => {
 
 const saveFrame = function (props, index) {
   const { frames, layers } = props
-  let frame = frames[index]
-  let context = document.createElement('canvas').getContext('2d')
+  const frame = frames[index]
+  const context = document.createElement('canvas').getContext('2d')
   context.canvas.width = frame.layers.length * frame.width
   context.canvas.height = frame.height
   frame.layers.forEach(onForEach.bind(this))
 
   function onForEach (item, index) {
-    let layer = layers[item]
+    const layer = layers[item]
     context.drawImage(getContext(layer.id).canvas,
       0, 0, layer.width, layer.height,
       index * layer.width, 0, layer.width, layer.height
@@ -48,7 +51,7 @@ const saveFrame = function (props, index) {
   return context
 }
 
-const onSave = props => {
+const onSave = props => () => {
 // if (!this.props.user) {
   //   return ModalManager.open(<Login onLogin={this.onLogin} />)
   // }
@@ -66,7 +69,7 @@ const onSave = props => {
   context.canvas.height = height
 
   sprite.frames.forEach((item, index) => {
-    let frame = saveFrame(props, item)
+    const frame = saveFrame(props, item)
     context.drawImage(frame.canvas,
       0, 0, width, sprite.height,
       0, sprite.height * index, width, sprite.height
@@ -106,7 +109,7 @@ const onSave = props => {
       props.setSpriteId(sprite.id, result._id)
       props.saveEditor()
     }
-    console.log('save result', result)
+    debug('save result', result)
   })
   return context.canvas
 }
@@ -115,7 +118,7 @@ const Proyect = props => (
   <Menu child>
     Project
     <li >new project</li>
-    <li onClick={onSave.bind(null, props)}>save sprite</li>
+    <li onClick={onSave(props)}>save sprite</li>
     <li onClick={props.openNewSpriteModal}>new sprite</li>
   </Menu>
 )

@@ -10,13 +10,13 @@ export const push = function (arr, item) {
 }
 
 export const editProp = function (obj, propName, propValue) {
-  let temp = {}
+  const temp = {}
   temp[propName] = propValue
   return Object.assign({}, obj, temp)
 }
 
 export const shiftPositions = function (arr, fromIndex, toIndex) {
-  let newArr = [].concat(arr.slice(0, fromIndex), arr.slice(fromIndex + 1))
+  const newArr = [].concat(arr.slice(0, fromIndex), arr.slice(fromIndex + 1))
   newArr.splice(toIndex, 0, arr[fromIndex])
   return newArr
   // y = 3 //from
@@ -28,11 +28,11 @@ export const shiftPositions = function (arr, fromIndex, toIndex) {
 }
 
 export const wrapActionCreators = function (dispatch, actionCreators) {
-  let obj = {}
-  let keys = Object.keys(actionCreators)
+  const obj = {}
+  const keys = Object.keys(actionCreators)
   for (let index = 0; index < keys.length; index++) {
-    let name = keys[index]
-    let creator = actionCreators[name]
+    const name = keys[index]
+    const creator = actionCreators[name]
     obj[name] = bindActionCreators(creator, dispatch)
   }
   return obj

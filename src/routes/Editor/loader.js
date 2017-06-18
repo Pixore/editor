@@ -20,6 +20,10 @@ import {
   selectSpriteLayer
 } from '../../ducks'
 
+import createDebug from 'debug'
+
+const errorDebug = createDebug('error')
+
 const { dispatch } = store
 
 const actions = wrapActionCreators(dispatch, {
@@ -55,13 +59,13 @@ loader.onGetEditor = function (result) {
     )
   )
     .then(this.ensure)
-    .catch(console.error)
+    .catch(errorDebug)
 }
 
 const onGetSprite = sprite => new Promise(resolve => {
-  let image = new Image()
+  const image = new Image()
   let width, height
-  let context = document.createElement('canvas').getContext('2d')
+  const context = document.createElement('canvas').getContext('2d')
   context.canvas.width = width = sprite.width * sprite.layers
   context.canvas.height = height = sprite.height
   sprite.id = cuid()
@@ -102,7 +106,7 @@ const onGetSprite = sprite => new Promise(resolve => {
 
 const createFrameFromContext = function (sprite, image) {
   const frame = cuid()
-  let contextTemp = document.createElement('canvas').getContext('2d')
+  const contextTemp = document.createElement('canvas').getContext('2d')
   contextTemp.canvas.width = sprite.width
   contextTemp.canvas.height = sprite.height
 
@@ -126,16 +130,14 @@ const createFrameFromContext = function (sprite, image) {
     frame
   )
   for (let j = 0; j < sprite.layers; j++) {
-    let layer
     contextTemp.canvas.height = sprite.height// clean
     contextTemp.drawImage(image.canvas,
       sprite.width * j, 0, sprite.width, sprite.height,
       0, 0, sprite.width, sprite.height
     )
-    layer = createLayersFromContext(sprite, contextTemp, frame, j)
     actions.addLayerFrame(
       frame,
-      layer
+      createLayersFromContext(sprite, contextTemp, frame, j)
     )
   }
   return frame
@@ -164,7 +166,7 @@ loader.init = function (cb) {
   http.get('/api/editor/user/last')
     .then(this.onGetEditor)
     .catch(err => {
-      console.log(err)
+      errorDebug(err)
       createSprite({current: true})
       this.ensure()
     })

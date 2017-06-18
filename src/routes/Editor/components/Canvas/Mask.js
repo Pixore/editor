@@ -15,15 +15,15 @@ obj.propTypes = {
 }
 
 obj.componentDidMount = function () {
-  let context = this.refs.canvas.getContext('2d')
+  const context = this.refs.canvas.getContext('2d')
   this.setState({ context })
   this.props.setContext('mask', context)
 }
 
 obj.paint = function (context, artboard, layer) {
   context = context || this.context
-  let width = (layer.width * artboard.scale)
-  let height = (layer.height * artboard.scale)
+  const width = (layer.width * artboard.scale)
+  const height = (layer.height * artboard.scale)
   context.fillStyle = '#494949'
   context.fillRect(0, 0, context.canvas.width, context.canvas.width)
   context.clearRect(artboard.x, artboard.y, width, height)
@@ -36,11 +36,11 @@ obj.componentDidUpdate = function () {
 }
 
 obj.render = function () {
-  return <canvas
+  return (<canvas
     ref='canvas'
     width={this.props.width}
     height={this.props.height}
-    className='mask' />
+    className='mask' />)
 }
 
 const Mask = React.createClass(obj)

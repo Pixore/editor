@@ -27,8 +27,8 @@ obj.getInitialState = function () {
 obj.initPreivew = function (props) {
   const frame = props.frames[props.sprite.frames[0]]
   if (frame) {
-    let el = this.el
-    let size = getPreviewSize(
+    const el = this.el
+    const size = getPreviewSize(
       el.clientWidth,
       el.clientHeight - /* size of range div */25,
       frame.width,
@@ -54,16 +54,18 @@ obj.getSprite = function () {
   style.width = this.state.maxWidth
   style.height = this.state.maxHeight
   if (this.state.width && this.state.height) {
-    return <div style={style} className='context-preview'>
-      <Sprite
-        interval={interval}
-        style={{marginTop: this.state.marginTop, marginLeft: this.state.marginLeft}}
-        width={this.state.width}
-        height={this.state.height}
-        frames={this.props.frames}
-        filter={this.props.sprite.frames}
-      />
-    </div>
+    return (
+      <div style={style} className='context-preview'>
+        <Sprite
+          interval={interval}
+          style={{marginTop: this.state.marginTop, marginLeft: this.state.marginLeft}}
+          width={this.state.width}
+          height={this.state.height}
+          frames={this.props.frames}
+          filter={this.props.sprite.frames}
+        />
+      </div>
+    )
   }
   return <div />
 }
@@ -73,20 +75,27 @@ obj.setRef = function (el) {
 }
 
 obj.render = function () {
-  return <div ref={this.setRef} className={'panel-preview preview ' + this.props.className} style={this.props.style}>
-    {
-      this.getSprite()
-    }
-    <div className='fps-range input-group'>
-      <div className='span'>
-        <span>FPS</span>
-      </div>
-      <Range value={this.state.fps} large onChange={this.onChangeRange} min={1} max={24} />
-      <div className='span'>
-        <span>{this.state.fps}</span>
+  return (
+    <div ref={this.setRef} className={'panel-preview preview ' + this.props.className} style={this.props.style}>
+      {
+        this.getSprite()
+      }
+      <div className='fps-range input-group'>
+        <div className='span'>
+          <span>FPS</span>
+        </div>
+        <Range
+          large
+          value={this.state.fps}
+          onChange={this.onChangeRange}
+          min={1}
+          max={24} />
+        <div className='span'>
+          <span>{this.state.fps}</span>
+        </div>
       </div>
     </div>
-  </div>
+  )
 }
 
 const Preview = connect(

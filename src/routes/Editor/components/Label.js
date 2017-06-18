@@ -13,9 +13,9 @@ obj.propTypes = {
 }
 
 obj.render = function () {
-  return <div className={this.props.className} style={this.props.style}>
+  return (<div className={this.props.className} style={this.props.style}>
     <label>{this.props.text}</label>
-  </div>
+  </div>)
 }
 
 const Label = React.createClass(obj)

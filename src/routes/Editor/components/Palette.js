@@ -38,7 +38,7 @@ obj.getInitialState = function () {
 
 obj.componentDidMount = function () {
   if (this.props.sprite) {
-    let spriteIndex = this.props.sprite.id
+    const spriteIndex = this.props.sprite.id
     getSpritePalette(
       spriteIndex
     ).then(result => this.props.setCurrentPalette(spriteIndex, result.array))
@@ -87,9 +87,9 @@ obj.onSave = function () {
 }
 
 obj.getNextPosition = function () {
-  let nextPosition = {}
-  let palette = this.props.palettes[this.props.palette]
-  let max = 6
+  const nextPosition = {}
+  const palette = this.props.palettes[this.props.palette]
+  const max = 6
 
   Object.assign(nextPosition, palette.colors[palette.colors.length - 1].position)
   nextPosition.x++
@@ -101,25 +101,27 @@ obj.getNextPosition = function () {
 }
 
 obj.render = function () {
-  return <div className={'panel-palette palette ' + this.props.className} style={this.props.style}>
-    <button className='btn' >=</button>
-    <button
-      disabled={this.props.palettes.length < 1}
-      className={'btn ' + (this.state.current ? 'active' : '')}
-      title='Current Palette'
-      onClick={this.toggleCurrent}
-    >C</button>
-    <button
-      className='btn'
-      disabled={this.state.current}
-      onClick={this.onAddColor}
-    >+</button>
-    {this.getPalette().unsaved ? <span onClick={this.onSave}>!¡</span> : null}
-    <ContentColors
-      setPrimaryColor={color => this.props.setSpritePrimaryColor(this.props.sprite.id, color)}
-      setSecondaryColor={color => this.props.setSpriteSecondaryColor(this.props.sprite.id, color)}
-      colors={this.getPalette()} />
-  </div>
+  return (
+    <div className={'panel-palette palette ' + this.props.className} style={this.props.style}>
+      <button className='btn' >=</button>
+      <button
+        disabled={this.props.palettes.length < 1}
+        className={'btn ' + (this.state.current ? 'active' : '')}
+        title='Current Palette'
+        onClick={this.toggleCurrent}
+      >C</button>
+      <button
+        className='btn'
+        disabled={this.state.current}
+        onClick={this.onAddColor}
+      >+</button>
+      {this.getPalette().unsaved ? <span onClick={this.onSave}>!¡</span> : null}
+      <ContentColors
+        setPrimaryColor={color => this.props.setSpritePrimaryColor(this.props.sprite.id, color)}
+        setSecondaryColor={color => this.props.setSpriteSecondaryColor(this.props.sprite.id, color)}
+        colors={this.getPalette()} />
+    </div>
+  )
 }
 obj.getPalette = function () {
   if (this.state.current) {

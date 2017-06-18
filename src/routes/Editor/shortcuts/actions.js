@@ -32,7 +32,7 @@ export default {
     // return data.layer.restoreState(data.data)
   },
   resize: function (data) {
-    let newData = {
+    const newData = {
       width: data.sprite.width,
       height: data.sprite.height,
       sprite: data.sprite,

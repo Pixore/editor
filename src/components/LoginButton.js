@@ -7,6 +7,9 @@ import http from '../utils/http'
 import {
   setUser
 } from '../ducks'
+import createDebug from 'debug'
+
+const debug = createDebug('')
 
 const obj = {}
 
@@ -39,7 +42,7 @@ obj.intervalClose = function () {
   if (!this.newWin.closed) return
 
   http.get('/api/auth/whoami').then(user => {
-    console.log(user)
+    debug(user)
     if (!user) return
     store.dispatch(setUser(user))
     this.props.onLogin()
@@ -49,8 +52,8 @@ obj.intervalClose = function () {
 
 obj.render = function () {
   let text = ''
-  let style = {}
-  let className = classNames(
+  const style = {}
+  const className = classNames(
     this.props.className,
     { 'twitter': this.props.twitter }
   )
@@ -58,9 +61,15 @@ obj.render = function () {
     text = 'Connect with Twitter'
     style.background = '#00aced'
   }
-  return <a href='' onClick={this.onClick} style={style} className={className}>
-    {text}
-  </a>
+  return (
+    <a
+      href=''
+      onClick={this.onClick}
+      style={style}
+      className={className}>
+      {text}
+    </a>
+  )
 }
 
 const LoginButton = React.createClass(obj)

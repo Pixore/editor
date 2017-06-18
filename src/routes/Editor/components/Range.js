@@ -31,7 +31,9 @@ obj.setValue = function (value) {
   if (value < this.props.min) {
     value = this.props.min
   }
-  this.props.onChange && this.props.onChange(value)
+  if (this.props.onChange) {
+    this.props.onChange(value)
+  }
 }
 
 obj.onWheel = function (evt) {
@@ -61,7 +63,9 @@ obj.onMouseDown = function (evt) {
   }).on('mouseup.range', evt => {
     document.body.style.cursor = ''
     $window.off('mousemove.range').off('mouseup.range')
-    evt.clientY === originalY && input.focus()
+    if (evt.clientY === originalY) {
+      input.focus()
+    }
   })
 }
 
@@ -76,11 +80,25 @@ obj.componentWillReceiveProps = function (nextProps) {
 
 obj.render = function () {
   if (this.props.large) {
-    return <input className='range-large span' type='range' max={this.props.max} min={this.props.min} value={this.props.value} onChange={this.onChange} />
+    return (
+      <input
+        className='range-large span'
+        type='range'
+        max={this.props.max}
+        min={this.props.min}
+        value={this.props.value}
+        onChange={this.onChange} />
+    )
   }
-  return <div className='range-small' onWheel={this.onWheel} style={{backgroundImage: this.getBackground()}} onMouseDown={this.onMouseDown}>
-    <input className='input' value={this.props.value} onChange={this.onChange} />
-  </div>
+  return (
+    <div
+      className='range-small'
+      onWheel={this.onWheel}
+      style={{backgroundImage: this.getBackground()}}
+      onMouseDown={this.onMouseDown}>
+      <input className='input' value={this.props.value} onChange={this.onChange} />
+    </div>
+  )
 }
 
 const Range = React.createClass(obj)

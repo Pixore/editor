@@ -1,13 +1,14 @@
-const $window = $(window)
 import { store } from '../../../store'
 import execute from './actions'
+
+const $window = $(window)
 const noop = function () {}
 
 const shortcuts = {
   90: (ctrl) => {
     if (ctrl) {
-      let state = store.getState()
-      let action = state.Editor.history.undo[state.Editor.history.undo.length - 1]
+      const state = store.getState()
+      const action = state.Editor.history.undo[state.Editor.history.undo.length - 1]
       if (action) {
         execute[action.type](action.data, state, true)
       }
@@ -15,8 +16,8 @@ const shortcuts = {
   },
   89: (ctrl) => {
     if (ctrl) {
-      let state = store.getState()
-      let action = state.Editor.history.redo[state.Editor.history.redo.length - 1]
+      const state = store.getState()
+      const action = state.Editor.history.redo[state.Editor.history.redo.length - 1]
       if (action) {
         execute[action.type](action.data, state)
       }
@@ -34,7 +35,7 @@ export const off = function () {
 }
 
 export const onKeydown = function (evt) {
-  let key = evt.keyCode
+  const key = evt.keyCode
     ? evt.keyCode
     : evt.which;
   (shortcuts[key] || noop)(evt.ctrlKey)

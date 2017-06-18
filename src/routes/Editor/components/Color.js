@@ -1,5 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import createDebug from 'debug'
+
+const debug = createDebug()
 
 const obj = {}
 
@@ -25,7 +28,7 @@ obj.getHandler = function () {
 }
 
 obj.onClick = function () {
-  console.log('color select')
+  debug('color select')
 }
 
 obj.render = function () {
@@ -39,9 +42,9 @@ obj.render = function () {
     width: this.props.size,
     height: this.props.size
   }
-  return <div className={className} style={styleBackground} onClick={this.getHandler()}>
+  return (<div className={className} style={styleBackground} onClick={this.getHandler()}>
     <div style={styleColor} />
-  </div>
+  </div>)
 }
 
 const Color = React.createClass(obj)

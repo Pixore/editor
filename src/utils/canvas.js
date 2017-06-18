@@ -66,7 +66,7 @@ export function validCord (layer, cord) {
 }
 
 export function cloneContext (context) {
-  let { width, height } = context.canvas
+  const { width, height } = context.canvas
   let clone = document.createElement('canvas')
   clone.width = width
   clone.height = height
@@ -79,10 +79,10 @@ export function cloneContext (context) {
 }
 
 function scaleContext (context, scale = 1) {
-  let { width, height } = context.canvas
+  const { width, height } = context.canvas
   let clone = document.createElement('canvas')
-  let scaleHeight = height * scale
-  let scaleWidth = width * scale
+  const scaleHeight = height * scale
+  const scaleWidth = width * scale
   clone.width = scaleWidth
   clone.height = scaleHeight
   clone = clone.getContext('2d')
@@ -99,16 +99,16 @@ export function getImageData (context) {
 }
 
 export function noTransparent (context, scale, transparent) {
-  let { width } = context.canvas
-  let data = getImageData(context)
+  const { width } = context.canvas
+  const data = getImageData(context)
   context = scaleContext(context, scale)
 
   context.fillStyle = transparent
   for (let i = 0; i < data.length; i += 4) {
     if (data[i + 3] === 0) {
-      let pos = i / 4
-      let x = pos % width
-      let y = ~~(pos / width)
+      const pos = i / 4
+      const x = pos % width
+      const y = ~~(pos / width)
 
       context.fillRect(x * scale, y * scale, scale, scale)
     }

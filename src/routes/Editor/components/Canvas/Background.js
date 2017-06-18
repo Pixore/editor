@@ -14,7 +14,7 @@ obj.propTypes = {
 }
 
 obj.componentDidMount = function () {
-  let context = this.refs.canvas.getContext('2d')
+  const context = this.refs.canvas.getContext('2d')
   this.setState({ context })
   this.props.setContext('background', context)
 }
@@ -25,7 +25,7 @@ obj.componentWillUpdate = function (nextProps) {
 }
 obj.paint = function (context, artboard, layer) {
   context = context || this.state.context
-  let pattern = context.createPattern(transparent, 'repeat')
+  const pattern = context.createPattern(transparent, 'repeat')
   context.fillStyle = pattern
   context.fillRect(
     artboard.x, artboard.y, layer.width * artboard.scale, layer.height * artboard.scale
@@ -40,11 +40,11 @@ obj.componentDidUpdate = function () {
   }
 }
 obj.render = function () {
-  return <canvas
+  return (<canvas
     ref='canvas'
     width={this.props.width}
     height={this.props.height}
-    className='background' />
+    className='background' />)
 }
 
 const Background = React.createClass(obj)

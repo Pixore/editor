@@ -63,29 +63,62 @@ obj.onClickTool = function (name) {
 }
 
 obj.render = function () {
-  return <div className='panel-tools'>
-    <div className='colors'>
-      <Color onClick={this.onClickSecondary} color={this.props.secondaryColor} size={35} className={'secondary'} />
-      <Color onClick={this.onClickPrimary} color={this.props.primaryColor} size={35} className={'primary'} />
+  return (
+    <div className='panel-tools'>
+      <div className='colors'>
+        <Color
+          onClick={this.onClickSecondary}
+          color={this.props.secondaryColor}
+          size={35}
+          className={'secondary'} />
+        <Color
+          onClick={this.onClickPrimary}
+          color={this.props.primaryColor}
+          size={35}
+          className={'primary'} />
+      </div>
+      <div className='tools'>
+        {
+          this.props.tools.map((item, index) => <ToolButton onClick={this.onClickTool} name={item} key={index} />)
+        }
+      </div>
     </div>
-    <div className='tools'>
-      {
-        this.props.tools.map((item, index) =>
-          <Tooltipy key={index} text={item} mode='top'>
-            <button
-              onClick={this.onClickTool.bind(this, item)}
-              className={this.props.tool === item ? 'active' : ''} >
-              {item.slice(0, 1) }
-            </button>
-          </Tooltipy>
-        )
-      }
-    </div>
-  </div>
+  )
+}
+
+class ToolButton extends React.Component {
+  constructor () {
+    super()
+    this.onClick = this.onClick.bind(this)
+  }
+  shouldComponentUpdate (nextProps) {
+    return nextProps.name !== this.props.name ||
+      nextProps.active !== this.props.active
+  }
+  onClick () {
+    this.props.onClick(this.props.name)
+  }
+  render () {
+    return (
+      <Tooltipy text={this.props.name} mode='top'>
+        <button
+          onClick={this.onClick}
+          className={this.props.active ? 'active' : ''} >
+          {this.props.name.slice(0, 1) }
+        </button>
+      </Tooltipy>
+    )
+  }
+}
+
+ToolButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  active: PropTypes.bool
 }
 
 function mapStateToProps (state) {
-  let sprite = state.sprites[state.editor.sprite]
+  const sprite = state.sprites[state.editor.sprite]
   return {
     sprite: sprite.id,
     tools: state.editor.tools,

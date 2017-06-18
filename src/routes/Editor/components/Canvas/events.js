@@ -32,7 +32,7 @@ export const paintPreview = function (cord, context, artboard) {
   if (artboard.select) {
     // this.paintAreaSelect()
   }
-  let realCord = {
+  const realCord = {
     x: cord.x * artboard.scale + artboard.x,
     y: cord.y * artboard.scale + artboard.y
   }
@@ -53,8 +53,8 @@ export const openContextMenu = function (evt) {
 }
 export const center = function (stats) {
   stats = stats || this.state.stats
-  let { sprite } = this.props
-  let size = getPreviewSize(stats.width, stats.height, sprite.width, sprite.height)
+  const { sprite } = this.props
+  const size = getPreviewSize(stats.width, stats.height, sprite.width, sprite.height)
   this.props.setSpriteArtboard(this.props.sprite.id, {
     scale: floor(size.scale),
     x: Number.parseInt(stats.left + size.marginLeft),
@@ -69,12 +69,11 @@ export const onCenter = function () {
 }
 
 export const onMouseDown = function (evt) {
-  let cord
   const { $canvas, context } = this.state.preview
   const { sprite, layer, tool } = this.props
   evt.stopImmediatePropagation()
   evt.preventDefault()
-  cord = calculatePosition(sprite.artboard, evt.clientX, evt.clientY)
+  const cord = calculatePosition(sprite.artboard, evt.clientX, evt.clientY)
   if (!validCord(this.props.layer, cord)) {
     if (evt.which === RIGHT_CLICK) {
       this.openContextMenu(evt)
@@ -134,8 +133,8 @@ export const offMousePreview = function ($canvas) {
 
 export const onDragMove = function (evt) {
   evt.preventDefault()
-  let diffX = evt.clientX - lastDragX
-  let diffY = evt.clientY - lastDragY
+  const diffX = evt.clientX - lastDragX
+  const diffY = evt.clientY - lastDragY
   lastDragX = evt.clientX
   lastDragY = evt.clientY
   this.shiftDiff(diffX, diffY)

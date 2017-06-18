@@ -1,22 +1,5 @@
 import './style/main.styl'
-
-window.hasVal = (val) => {
-  return typeof val !== 'undefined' && val !== null
-}
-
 import { $ } from './utils/dom'
-
-window.$ = $
-window.$window = $(window)
-
-const $window = $(window)
-$window.on('keydown.general', evt => {
-  window.CTRL_KEY = evt.ctrlKey
-  window.ALT_KEY = evt.altKey
-}).on('keyup.general', evt => {
-  window.CTRL_KEY = evt.ctrlKey
-  window.ALT_KEY = evt.altKey
-})
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -34,6 +17,22 @@ import {
   setUser
 } from './ducks'
 
+window.hasVal = (val) => {
+  return typeof val !== 'undefined' && val !== null
+}
+
+window.$ = $
+window.$window = $(window)
+
+const $window = $(window)
+$window.on('keydown.general', evt => {
+  window.CTRL_KEY = evt.ctrlKey
+  window.ALT_KEY = evt.altKey
+}).on('keyup.general', evt => {
+  window.CTRL_KEY = evt.ctrlKey
+  window.ALT_KEY = evt.altKey
+})
+
 http.get('/api/palettes').then(function (result) {
   if (result.code !== 0 || !result.data) {
     return
@@ -45,6 +44,8 @@ http.get('/api/palettes').then(function (result) {
 http.get('/api/auth/whoami').then(function (user) {
   store.dispatch(setUser(user))
 })
+
+// console.log("aaa");
 
 ReactDOM.render((
   <div className='root rdl-dark'>

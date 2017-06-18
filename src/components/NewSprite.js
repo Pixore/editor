@@ -96,30 +96,33 @@ obj.resetValues = function () {
 }
 
 obj.render = function () {
-  return <div className='new-sprite'>
+  return (<div className='new-sprite'>
     <form className='form' onSubmit={this.onSubmit} ref='form'>
       <div className='form-group'>
         <label>Name</label>
-        <input className='input' type='text' name='name' defaultValue='Untitled' />
+        <input className='input' type='text' name='name'
+          defaultValue='Untitled' />
       </div>
       <div className='form-group'>
         <label>Width</label>
         <div className='input-group'>
-          <input className='input' type='number' name='width' defaultValue='50' />
+          <input className='input' type='number' name='width'
+            defaultValue='50' />
           <span>px</span>
         </div>
       </div>
       <div className='form-group'>
         <label>Height</label>
         <div className='input-group'>
-          <input className='input' type='number' name='height' defaultValue='50' />
+          <input className='input' type='number' name='height'
+            defaultValue='50' />
           <span>px</span>
         </div>
       </div>
       <button className='btn' type='submit'>Create Sprite</button>
       <button className='btn' onClick={this.onClose}>Cancel</button>
     </form>
-  </div>
+  </div>)
 }
 
 const NewSprite = connect(
