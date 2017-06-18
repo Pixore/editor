@@ -7,10 +7,7 @@
   "pixorePath": "editor",
   "scripts": {
     "build": "rimraf build && env-cmd ./.env.prod webpack --config ./config/webpack.config.js ",
-    "test:single": "karma start --single-run",
-    "test:watch": "karma start --auto-watch",
-    "test:main": "npm run lint && yarn run test:single",
-    "test": "env-cmd ./.env.test yarn run test:main",
+    "test": "npm run lint && pixore-front-scripts test",
     "start": "pixore-front-scripts start",
     "lint": "eslint ./src"
   },
@@ -48,7 +45,7 @@
   },
   "devDependencies": {
     "@pixore/eslint-config": "^1.4.0",
-    "@pixore/front-scripts": "^1.5.3",
+    "@pixore/front-scripts": "^1.6.0",
     "chai": "^3.5.0",
     "enzyme": "^2.6.0",
     "eslint": "^3.19.0",
