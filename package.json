@@ -6,7 +6,7 @@
   "homepage": "http://pixore.io",
   "pixorePath": "editor",
   "scripts": {
-    "build": "rimraf build && env-cmd ./.env.prod webpack --config ./config/webpack.config.js ",
+    "build": "npm run lint && pixore-front-scripts build",
     "test": "npm run lint && pixore-front-scripts test",
     "start": "pixore-front-scripts start",
     "lint": "eslint ./src"
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@pixore/eslint-config": "^1.4.0",
-    "@pixore/front-scripts": "^1.6.0",
+    "@pixore/front-scripts": "^1.7.0",
     "chai": "^3.5.0",
     "enzyme": "^2.6.0",
     "eslint": "^3.19.0",
