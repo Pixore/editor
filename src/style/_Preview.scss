@@ -1,0 +1,23 @@
+.preview {
+  font: bold 12px sans-serif;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+
+  .context-preview {
+    border: 1px solid transparent;
+
+    canvas {
+      display: inherit;
+      margin: 0 auto;
+    }
+  }
+
+  .fps-range {
+    width: 100%;
+
+    span {
+      vertical-align: super;
+    }
+  }
+}

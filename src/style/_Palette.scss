@@ -1,0 +1,62 @@
+/* stylelint-disable selector-no-qualifying-type */
+
+.panel-palette {
+  //background whitesmoke
+  height: 100%;
+
+  .input-color {
+    background-image: url('../assets/images/transparent.png');
+    background-size: 7%;
+  }
+
+  .picker {
+    input[type=range] {
+      width: 70%;
+    }
+  }
+
+  .palette {
+    height: calc(100% - 25px);
+    overflow-y: scroll;
+
+    .color {
+      float: left;
+      margin: 1px;
+    }
+  }
+
+  .content-colors {
+    height: calc(100% - 40px);
+    overflow: auto;
+    position: relative;
+    width: 100%;
+
+    .drag-color {
+      position: absolute;
+    }
+  }
+}
+
+.panel-palettes {
+  background: $main-white;
+
+}
+
+.content-palettes {
+  .palette {
+    cursor: pointer;
+    margin: 2px;
+    padding: 2px;
+
+    &:hover,
+    &.active {
+      background: $main-white;
+    }
+
+    .color {
+      margin-right: 1px;
+      pointer-events: none;
+      vertical-align: top;
+    }
+  }
+}

@@ -1,0 +1,144 @@
+.hsla {
+  float: left;
+  margin: 5px;
+
+  .h,
+  .sl,
+  .alpha {
+    border: 1px solid rgb(135, 135, 135);
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.14902) 0 0 0 1px inset, rgba(0, 0, 0, 0.247059) 0 0;
+    box-sizing: border-box;
+    float: left;
+    position: relative;
+  }
+
+  .alpha {
+    .picker {
+      background: rgb(255, 255, 255);
+      border-radius: 1px;
+      box-shadow: rgba(0, 0, 0, 0.6) 0 0 2px;
+      height: calc(100% - 2px);
+      margin-top: 1px;
+      transform: translateX(-3px);
+      width: 6px;
+    }
+
+    .background,
+    .a {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .background {
+      background-size: 7%;
+    }
+  }
+
+  .h {
+    background: linear-gradient(to top, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+
+    .picker {
+      background: rgb(255, 255, 255);
+      border-radius: 1px;
+      box-shadow: rgba(0, 0, 0, 0.6) 0 0 2px;
+      height: 6px;
+      margin-left: 1px;
+      transform: translateY(-3px);
+      width: calc(100% - 2px);
+    }
+  }
+
+  .sl {
+    margin: 0 5px 5px 0;
+    position: relative;
+
+    .picker {
+      border-radius: 50%;
+      box-shadow: rgb(255, 255, 255) 0 0 0 1px inset;
+      height: 10px;
+      transform: translate(-5px, -5px);
+      width: 10px;
+    }
+
+    .s,
+    .l {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .s {
+      background-image: linear-gradient(to bottom, transparent 0%, #000 100%);
+    }
+
+    .l {
+      background-image: linear-gradient(to right, #fff 0%, transparent 100%);
+    }
+  }
+}
+
+.color-picker {
+  .picker {
+    pointer-events: none;
+    position: absolute;
+  }
+
+  //-.canvas-picker
+  display: inline-block;
+  margin: 5px;
+  // canvas
+  //   vertical-align top
+  .content-canvas {
+    display: inline-block;
+    position: relative;
+
+    .canvas-picker {
+      border: 2px solid $main-white;
+      border-radius: 100%;
+      box-shadow: 0 0 3px $main-black;
+      box-sizing: border-box;
+      height: 8px;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      width: 8px;
+    }
+  }
+
+  .content-rainbow {
+    display: inline-block;
+    position: relative;
+
+    .rainbow-picker {
+      border: 2px solid $main-white;
+      height: 4px;
+      left: -3px;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      width: calc(100% + 3px);
+    }
+  }
+
+  .content-alpha {
+    //background url('../assets/images/transparent.png')
+    background-size: 10%;
+    position: relative;
+
+    .alpha-picker {
+      border: 2px solid $main-white;
+      height: calc(100% + 3px);
+      pointer-events: none;
+      position: absolute;
+      top: -3px;
+      width: 4px;
+    }
+  }
+}

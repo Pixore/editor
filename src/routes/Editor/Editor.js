@@ -10,8 +10,8 @@ import {
   cuid
 } from 'react-dynamic-layout/lib'
 
-import 'react-dynamic-layout/lib/style/base/index.styl'
-import 'react-dynamic-layout/lib/style/dark/index.styl'
+import 'react-dynamic-layout/build/base.css'
+import 'react-dynamic-layout/build/dark-theme.css'
 
 import ContentCanvas from './components/Canvas/ContentCanvas'
 import './components/Preview'

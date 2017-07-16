@@ -1,0 +1,91 @@
+
+
+.layers {
+  height: 100%;
+  width: 100%;
+  //background: whitesmoke
+  .add-layer {
+    margin: 3%;
+    width: 94%;
+  }
+
+  .list-content {
+    height: calc(100% - 37px);
+    overflow-y: scroll;
+  }
+}
+
+
+.preview-layer {
+  cursor: move;
+  margin-bottom: 10px;
+  outline: 3px solid $main-black;
+  position: relative;
+  transition: 0.3s top, 0.1s transform; //cubic-bezier(0.46, 0.03, 0.52, 0.96)
+  // z-depth-1() 0
+  &.drag {
+    background: rgba(0, 0, 0, 0.6);
+    // z-depth-2() 0
+    transform: scale(1.07);
+    transition: 0.1s transform, 0s top;
+    z-index: 1;
+
+    * {
+      opacity: 0.4;
+    }
+  }
+
+  span {
+    background: $main-black;
+    border-radius: 0 10px 0 0;
+    bottom: 0;
+    height: 28px;
+    left: 0;
+    padding: 5px 5px 2px 2px;
+    position: absolute;
+    text-align: center;
+    width: 22px;
+  }
+
+  .btn,
+  .index {
+    height: $size-btn-preview;
+    position: absolute;
+    width: $size-btn-preview;
+  }
+
+  .index {
+    bottom: 0;
+    right: 0;
+  }
+
+  .btn {
+    font-size: $size-font-preview;
+    left: 0;
+    opacity: 0;
+    top: 0;
+    transition: opacity 0.3s;
+  }
+
+  .btn-clone {
+    left: $size-btn-preview;
+  }
+
+  .btn-hidden {
+    left: $size-btn-preview * 2;
+  }
+
+  &:hover {
+    .btn {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    outline: 3px rgba(223, 116, 12, 1) solid;
+
+    span {
+      background: rgba(223, 116, 12, 1);
+    }
+  }
+}

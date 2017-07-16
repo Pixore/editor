@@ -1,4 +1,4 @@
-import './style/main.styl'
+import './style/index.scss'
 import { $ } from './utils/dom'
 
 import React from 'react'

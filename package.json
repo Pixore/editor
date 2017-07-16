@@ -8,7 +8,7 @@
   "scripts": {
     "build": "npm run lint && pixore-front-scripts build",
     "test": "npm run lint && pixore-front-scripts test",
-    "start": "pixore-front-scripts start",
+    "start": "pixore-front-scripts start --port 8000",
     "lint": "eslint ./src"
   },
   "keywords": [
@@ -45,7 +45,8 @@
   },
   "devDependencies": {
     "@pixore/eslint-config": "^1.4.0",
-    "@pixore/front-scripts": "^1.7.0",
+    "@pixore/front-scripts": "^1.8.0",
+    "@pixore/stylelint-config": "^1.2.0",
     "chai": "^3.5.0",
     "enzyme": "^2.6.0",
     "eslint": "^3.19.0",

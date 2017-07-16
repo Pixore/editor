@@ -1,0 +1,56 @@
+// .panel-resize {
+//   background: whitesmoke;
+// }
+
+// .resize-grid {
+//   height: 65px;
+//   margin: 5px auto;
+//   overflow: hidden;
+//   width: 65px;
+
+//   .resize-cell {
+//     background: rgba(128, 128, 128, 0.7);
+//     // display: inline-block;
+//     float: left;
+//     height: 20px;
+//     margin: 0 0 1px 1px;
+//     position: relative;
+//     width: 20px;
+
+//     &.active {
+//       background: #A3C4FF;
+//       z-index: 2;
+
+//       span {
+//         border: 10px solid transparent;
+//         pointer-events: none;
+//         position: absolute;
+//         transform: scale(0.7);
+
+//         &:nth-child(1) {
+//           border-bottom: 10px solid #A3C4FF;
+//           top: -25px;
+//           //left 5px
+//         }
+
+//         &:nth-child(2) {
+//           border-left: 10px solid #A3C4FF;
+//           right: -25px;
+//           //top 5px
+//         }
+
+//         &:nth-child(3) {
+//           border-top: 10px solid #A3C4FF;
+//           bottom: -25px;
+//           //left 5px
+//         }
+
+//         &:nth-child(4) {
+//           border-right: 10px solid #A3C4FF;
+//           left: -25px;
+//           //top 5px
+//         }
+//       }
+//     }
+//   }
+// }

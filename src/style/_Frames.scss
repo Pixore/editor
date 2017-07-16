@@ -1,0 +1,95 @@
+$size-btn-preview: 20px;
+$size-font-preview: 0.65em;
+
+.frames {
+  //background: whitesmoke
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+
+  .add-frame {
+    margin: 3%;
+    width: 94%;
+  }
+
+  .list-content {
+    height: calc(100% - 37px);
+    overflow-y: scroll;
+  }
+
+  .preview-frames {
+    outline: 3px solid $main-black;
+    transition: 0.3s top, 0.1s transform; //cubic-bezier(0.46, 0.03, 0.52, 0.96)
+    width: 100%;
+    // z-depth-1() 0
+    &.drag {
+      background: rgba(0, 0, 0, 0.6);
+      // z-depth-2() 0
+      transform: scale(1.07);
+      transition: 0.1s transform, 0s top;
+      z-index: 1;
+    }
+  }
+}
+
+.preview-frames {
+  cursor: move;
+  margin-bottom: 10px;
+  position: relative;
+
+  span {
+    background: $main-black;
+    border-radius: 0 10px 0 0;
+    bottom: 0;
+    height: 28px;
+    left: 0;
+    padding: 5px 5px 2px 2px;
+    position: absolute;
+    text-align: center;
+    width: 22px;
+  }
+
+  .btn,
+  .index {
+    height: $size-btn-preview;
+    position: absolute;
+    width: $size-btn-preview;
+  }
+
+  .index {
+    bottom: 0;
+    right: 0;
+  }
+
+  .btn {
+    font-size: $size-font-preview;
+    left: 0;
+    opacity: 0;
+    top: 0;
+    transition: opacity 0.3s;
+  }
+
+  .btn-clone {
+    left: $size-btn-preview;
+  }
+
+  .btn-hidden {
+    left: $size-btn-preview * 2;
+  }
+
+  &:hover {
+    .btn {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    outline: 3px rgba(223, 116, 12, 1) solid;
+
+    span {
+      background: rgba(223, 116, 12, 1);
+    }
+  }
+}
