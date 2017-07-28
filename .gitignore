@@ -6,7 +6,7 @@ stats.json
 .next
 .env*
 .env.json
-
+.DS_Store
 build
 files
 files-test
