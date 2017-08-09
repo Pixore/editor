@@ -8,6 +8,7 @@ import layers from './layers'
 import palettes from './palettes'
 import sprites from './sprites'
 import user from './user'
+import toasts from './toasts'
 
 export * from './editor'
 export * from './editorSprites'
@@ -17,6 +18,7 @@ export * from './layers'
 export * from './palettes'
 export * from './sprites'
 export * from './user'
+export * from './toasts'
 
 export default {
   reducer: combineReducers({
@@ -27,7 +29,8 @@ export default {
     layers: layers.reducer,
     palettes: palettes.reducer,
     sprites: sprites.reducer,
-    user: user.reducer
+    user: user.reducer,
+    toasts: toasts.reducer
   }),
   initialState: {
     editor: editor.initialState,
@@ -37,6 +40,7 @@ export default {
     layers: layers.initialState,
     palettes: palettes.initialState,
     sprites: sprites.initialState,
-    user: user.initialState
+    user: user.initialState,
+    toasts: toasts.initialState
   }
 }

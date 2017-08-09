@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import Toast from '../Toast'
 
-describe('components/Toast.js', () => {
+describe('components/Toast', () => {
   it('should render a toast', () => {
     const text = 'I\'m a toast'
     const shallowToast = shallow(

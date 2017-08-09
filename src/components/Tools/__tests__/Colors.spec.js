@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import Colors from '../Colors'
 import Color from '../../../routes/Editor/components/Color'
 
-describe('/components/Tools/Colors', () => {
+describe('components/Tools/Colors', () => {
   const onClickSecondarySpy = sinon.spy()
   const onClickPrimarySpy = sinon.spy()
   const shallowColors = shallow(
