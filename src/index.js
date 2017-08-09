@@ -9,6 +9,7 @@ import {Provider} from 'react-redux'
 import { store } from './store'
 import Editor from './routes/Editor'
 import Tooltip from './components/Tooltip'
+import Toasts from './components/Toasts'
 import http from './utils/http'
 
 import {
@@ -48,12 +49,13 @@ http.get('/api/auth/whoami').then(function (user) {
 // console.log("aaa");
 
 ReactDOM.render((
-  <div className='root rdl-dark'>
-    <Tooltip />
-    <Provider store={store}>
+  <Provider store={store}>
+    <div className='root rdl-dark'>
+      <Tooltip />
+      <Toasts />
       <Router history={browserHistory} >
         <Route path='/editor' component={Editor} />
       </Router>
-    </Provider>
-  </div>
+    </div>
+  </Provider>
 ), document.getElementById('root'))

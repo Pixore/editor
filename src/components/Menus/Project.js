@@ -14,6 +14,8 @@ import {
 } from '../../ducks'
 import createDebug from 'debug'
 
+import toast from '../../utils/toast.js'
+
 const debug = createDebug()
 
 const generateGif = (sprite, scale) => new Promise(resolve => {
@@ -108,6 +110,9 @@ const onSave = props => () => {
     if (isNew) {
       props.setSpriteId(sprite.id, result._id)
       props.saveEditor()
+      toast.show('sprite saved')
+    } else {
+      toast.show('sprite updated')
     }
     debug('save result', result)
   })

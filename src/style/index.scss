@@ -1,6 +1,6 @@
 @import '~normalize.css';
 @import './variables';
-// @import './mixins.styl'
+@import './mixins';
 // @import './Panel.styl'
 // @import './Range.styl'
 
@@ -128,3 +128,4 @@ img {
 @import './Resize';
 @import './Palette';
 @import './ColorPicker';
+@import './Toast';

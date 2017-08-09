@@ -1,0 +1,32 @@
+
+$toast-height: 50px;
+
+.toast {
+  @extend %z-depth-1;
+  align-items: center;
+  background-color: $main-black;
+  border-radius: 2px;
+  color: $main-white;
+  cursor: default;
+  display: flex;
+  font-size: 1.1rem;
+  font-weight: 300;
+  height: auto;
+  justify-content: space-between;
+  left: 50px;
+  line-height: 1.5em;
+  margin-top: 10px;
+  max-width: 100%;
+  min-height: $toast-height;
+  padding: 10px 25px;
+  position: fixed;
+  width: auto;
+  word-break: break-all;
+  z-index: 1000;
+  // .toast-action {
+  //   color: $toast-action-color;
+  //   font-weight: 500;
+  //   margin-left: 3rem;
+  //   margin-right: -25px;
+  // }
+}

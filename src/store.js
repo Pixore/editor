@@ -16,3 +16,5 @@ export const store = createStore(
   ducks.initialState,
   compose.apply(undefined, middlewares)
 )
+
+export default store
