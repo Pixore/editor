@@ -1,6 +1,11 @@
 
 import { bindActionCreators } from 'redux'
 
+export const removeArrayItem = function (arr, item) {
+  const index = arr.indexOf(item)
+  return [].concat(arr.slice(0, index), arr.slice(index + 1))
+}
+
 export const updateArrayItem = function (arr, index, item) {
   return [].concat(arr.slice(0, index), item, arr.slice(index + 1))
 }
